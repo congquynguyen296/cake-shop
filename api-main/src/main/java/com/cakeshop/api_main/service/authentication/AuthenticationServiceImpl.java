@@ -1,13 +1,17 @@
 package com.cakeshop.api_main.service.authentication;
 
 import com.cakeshop.api_main.dto.request.*;
+import com.cakeshop.api_main.dto.response.ExchangeTokenResponse;
 import com.cakeshop.api_main.dto.response.IntrospectResponse;
 import com.cakeshop.api_main.dto.response.LoginResponse;
+import com.cakeshop.api_main.dto.response.OutboundUserResponse;
 import com.cakeshop.api_main.exception.AppException;
 import com.cakeshop.api_main.exception.ErrorCode;
 import com.cakeshop.api_main.model.Account;
 import com.cakeshop.api_main.model.Group;
 import com.cakeshop.api_main.model.TokenValidation;
+import com.cakeshop.api_main.repository.external.IOutboundIdentityClientRepository;
+import com.cakeshop.api_main.repository.external.IOutboundUserClientRepository;
 import com.cakeshop.api_main.repository.internal.IAccountRepository;
 import com.cakeshop.api_main.repository.internal.IGroupRepository;
 import com.cakeshop.api_main.repository.internal.ITokenValidationRepository;
@@ -45,6 +49,10 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     PasswordEncoder passwordEncoder;
     ObjectGenerationUtils objectGenerationUtils;
 
+    // From outbound oauth2
+    IOutboundUserClientRepository outboundUserClientRepository;
+    IOutboundIdentityClientRepository outboundIdentityClientRepository;
+
     @NonFinal
     @Value("${jwt.refreshable-duration}")
     private long REFRESHABLE_DURATION;
@@ -52,6 +60,21 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     @NonFinal
     @Value("${jwt.signerKey}")
     private String SIGNER_KEY;
+
+    @NonFinal
+    @Value("${outbound.identity.client-id}")
+    protected String CLIENT_ID;
+
+    @NonFinal
+    @Value("${outbound.identity.client-secret}")
+    protected String CLIENT_SECRET;
+
+    @NonFinal
+    @Value("${outbound.identity.redirect-uri}")
+    protected String REDIRECT_URI;
+
+    @NonFinal
+    protected final String GRANT_TYPE = "authorization_code";
 
     @Override
     public LoginResponse login(LoginRequest request) {
@@ -242,6 +265,57 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
             message = "User is already active";
         }
         return message;
+    }
+
+    @Override
+    public LoginResponse loginWithGoogle(String code) {
+
+        try {
+            ExchangeTokenRequest exchangeToken = ExchangeTokenRequest.builder()
+                    .code(code)
+                    .clientId(CLIENT_ID)
+                    .clientSecret(CLIENT_SECRET)
+                    .grantType(GRANT_TYPE)
+                    .redirectUri(REDIRECT_URI)
+                    .build();
+            ExchangeTokenResponse response = outboundIdentityClientRepository.exchangeToken(exchangeToken);
+            log.info("Token response from credential: {}", response);
+
+            // Get user info
+            OutboundUserResponse accountInfoFromGoogle = outboundUserClientRepository.getUserInfo("json", response.getAccessToken());
+            log.info("Account info from google: {}", accountInfoFromGoogle);
+
+            // Onboard account with system
+            Account account = accountRepository.findByEmail(accountInfoFromGoogle.getEmail());
+            if (account == null) {
+                String defaultPassword = StringBuilderUtils.generateDefaultPassword();
+                emailService.sendEmail(accountInfoFromGoogle.getEmail(), StringBuilderUtils.subjectChangePasswordDefault
+                        , StringBuilderUtils.buildBodyChangePasswordDefault(accountInfoFromGoogle.getEmail(), defaultPassword));
+                account = Account.builder()
+                        .isActive(true)
+                        .username(accountInfoFromGoogle.getEmail())
+                        .email(accountInfoFromGoogle.getEmail())
+                        .avatarPath(accountInfoFromGoogle.getPicture())
+                        .password(passwordEncoder.encode(defaultPassword))
+                        .build();
+                Group defaultGroup = groupRepository.findByKind(2);
+                if (defaultGroup == null) {
+                    throw new AppException(ErrorCode.RESOURCE_EXISTED);
+                }
+                account.setGroup(defaultGroup);
+                accountRepository.save(account);
+            }
+
+            // Generate token
+            String token = objectGenerationUtils.generateToken(account);
+                return LoginResponse.builder()
+                    .token(token)
+                    .build();
+
+        } catch (Exception e) {
+            log.error("Login with google failed: {}", e.getMessage());
+            throw new AppException(ErrorCode.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Verify token

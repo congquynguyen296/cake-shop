@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Cake Shop</title>
+
+    <!-- Thêm Google Sign-In API -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
@@ -31,7 +35,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Lớp phủ đen mờ */
+            background: rgba(0, 0, 0, 0.5);
+            /* Lớp phủ đen mờ */
             z-index: 1;
         }
 
@@ -42,7 +47,8 @@
             justify-content: center;
             padding: 50px 0;
             position: relative;
-            z-index: 2; /* Đặt nội dung trên lớp phủ */
+            z-index: 2;
+            /* Đặt nội dung trên lớp phủ */
         }
 
         .login-box {
@@ -97,29 +103,6 @@
             transform: scale(1.05);
         }
 
-        .social-btn {
-            border: 2px solid #000;
-            color: #000;
-            font-weight: 500;
-            border-radius: 8px;
-            padding: 12px;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-        }
-
-        .social-btn:hover {
-            background-color: #000;
-            color: #fff;
-            transform: scale(1.05);
-        }
-
-        .social-btn i {
-            transition: color 0.3s ease;
-        }
-
-        .social-btn:hover i {
-            color: #fff;
-        }
-
         .text-center.my-3 {
             font-weight: 500;
             color: #666;
@@ -142,6 +125,30 @@
 
         .text-center.my-3::after {
             right: 0;
+        }
+
+        .social-btn {
+            border: 2px solid #000;
+            color: #000;
+            font-weight: 500;
+            border-radius: 8px;
+            padding: 12px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+
+        .social-btn i {
+            transition: color 0.3s ease;
+        }
+
+        .social-btn:hover i {
+            color: #fff;
         }
 
         a {
@@ -183,15 +190,17 @@
                         </form>
                         <div class="text-center my-3">OR</div>
                         <div class="d-grid mb-3">
-                            <button class="btn btn-outline-dark social-btn">
+                            <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=627966361130-8t8ee0l2obeenvgg9470lgp8sqn5vva7.apps.googleusercontent.com&redirect_uri=http://localhost:8080/api/v1/oauth2/login/google/callback&response_type=code&scope=openid%20email%20profile"
+                                class="btn btn-outline-dark social-btn">
                                 <i class="fab fa-google me-2"></i> Login with Google
-                            </button>
+                            </a>
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-outline-dark social-btn">
                                 <i class="fab fa-facebook-f me-2"></i> Login with Facebook
                             </button>
                         </div>
+
                         <p class="text-center mt-3">Don't have an account? <a href="register.html">Sign up</a></p>
                     </div>
                 </div>
@@ -220,8 +229,7 @@
             // Xử lý nút đăng nhập với Google/Facebook (chỉ là demo)
             $('.social-btn').on('click', function () {
                 const provider = $(this).find('i').hasClass('fa-google') ? 'Google' : 'Facebook';
-                alert(`Login with ${provider} clicked! (This is a demo)`);
-                // Thêm logic để tích hợp đăng nhập Google/Facebook ở đây
+                // alert(`Login with ${provider} clicked! (This is a demo)`);
             });
         });
     </script>

@@ -30,10 +30,8 @@ jwt:
   valid-duration: 600
   refreshable-duration: 3600
 
-#outbound:
-#  identity:
-#    client-id: ${CLIENT_ID}
-#    client-secret: ${CLIENT_SECRET}
-#    redirect-uri: "http://localhost:3000/authentication"
-#
-#
+outbound:
+  identity:
+    client-id: "627966361130-8t8ee0l2obeenvgg9470lgp8sqn5vva7.apps.googleusercontent.com"
+    client-secret: "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"
+    redirect-uri: "http://localhost:8080/api/v1/oauth2/login/google/callback"

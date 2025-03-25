@@ -22,4 +22,6 @@ public interface IAuthenticationService {
     String activeAccount(ActiveAccountRequest request);
 
     String resendOtpCode(ResendOtpCodeRequest request);
+
+    LoginResponse loginWithGoogle(String code);
 }

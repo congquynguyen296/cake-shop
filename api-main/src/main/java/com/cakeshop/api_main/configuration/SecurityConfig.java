@@ -29,6 +29,7 @@ public class SecurityConfig {
         "/auth/introspect",
         "/auth/resend-otp-code",
         "/auth/active-account",
+        "/oauth2/**",
         "/permission/**",
         "/group/**"
     };
