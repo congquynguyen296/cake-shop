@@ -26,8 +26,9 @@ public class OutboundController {
     @GetMapping("/oauth2/login/google/callback")
     public BaseResponse<LoginResponse> outboundAuthenticate(@RequestParam("code") String code) {
         return BaseResponse.<LoginResponse>builder()
+                .result(true)
                 .code(200)
-                .result(authenticationService.loginWithGoogle(code))
+                .data(authenticationService.loginWithGoogle(code))
                 .build();
     }
 }

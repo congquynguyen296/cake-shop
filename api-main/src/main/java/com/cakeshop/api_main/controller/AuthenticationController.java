@@ -32,18 +32,20 @@ public class AuthenticationController {
     @PostMapping("/login")
     BaseResponse<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
         return BaseResponse.<LoginResponse>builder()
+                .result(true)
                 .code(200)
                 .message("Login successful")
-                .result(authenticationService.login(request))
+                .data(authenticationService.login(request))
                 .build();
     }
 
     @PostMapping("/refresh-token")
     BaseResponse<LoginResponse> refresh(@RequestBody @Valid RefreshTokenRequest request) throws ParseException, JOSEException {
         return BaseResponse.<LoginResponse>builder()
+                .result(true)
                 .code(200)
                 .message("Refresh token successful")
-                .result(authenticationService.refresh(request))
+                .data(authenticationService.refresh(request))
                 .build();
     }
 

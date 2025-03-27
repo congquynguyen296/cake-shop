@@ -26,9 +26,10 @@ public class PermissionController {
     @PostMapping("/create")
     BaseResponse<String> createPermission(@RequestBody PermissionCreateRequest request) {
         return BaseResponse.<String>builder()
+                .result(true)
                 .code(200)
                 .message("Create group successfully")
-                .result(permissionService.createPermission(request))
+                .data(permissionService.createPermission(request))
                 .build();
     }
 }

@@ -31,7 +31,12 @@ public class SecurityConfig {
         "/auth/active-account",
         "/oauth2/**",
         "/permission/**",
-        "/group/**"
+        "/group/**",
+        "/v3/api-docs/**",
+        "/swagger-ui/**",
+        "/swagger-ui.html",
+        "/swagger-resources/**",
+        "/webjars/**"
     };
 
     CustomJwtDecoder jwtDecoder;

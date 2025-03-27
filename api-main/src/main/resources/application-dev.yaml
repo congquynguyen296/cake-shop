@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+  servlet:
+    context-path: /api/v1
+
+spring:
+  datasource:
+    url: ${DBMS_URL:jdbc:mysql://localhost:4000/cake_shop}
+    username: ${DBMS_USERNAME:root}
+    password: ${DBMS_PASSWORD:root}
+    driverClassName: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 30000
+      connection-timeout: 30000
+      max-lifetime: 600000
+      pool-name: HikariCP
+  config:
+    import: optional:file:.env[.properties]
+
+open:
+  api:
+    title: Cake Shop API Documentation
+    version: v1.1.0
+    description: API-Service
+    serverUrl: ${SPRING_SERVER_URL}
+    serverName: Server Test
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  signerKey: ${SECURITY_SIGNER_KEY}
+  valid-duration: 600
+  refreshable-duration: 3600
+
+outbound:
+  identity:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    redirect-uri: ${SECURITY_REDIRECT_URI}
