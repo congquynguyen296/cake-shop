@@ -39,9 +39,12 @@ spring:
     password: ${MAIL_PASSWORD}
     protocol: ${MAIL_PROTOCOL}
     properties:
-      mail.smtp.auth: true
-      mail.smtp.ssl.enable: false
-      mail.smtp.starttls.enable: true
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: true
   config:
     import: optional:file:.env[.properties]
 
