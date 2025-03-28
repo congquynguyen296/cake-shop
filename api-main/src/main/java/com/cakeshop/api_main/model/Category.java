@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "tbl_permission")
+@Table(name = "tbl_category")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter

@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,6 @@ public class CategoryController {
     CategoryMapper categoryMapper;
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @PreAuthorize("hasAuthority('CAT_LIS')")
     public BaseResponse<PaginationResponse<CategoryResponse>> getListForAdmin(
             @Valid @ModelAttribute CategoryCriteria categoryCriteria,
             Pageable pageable
@@ -61,7 +61,7 @@ public class CategoryController {
     }
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @PreAuthorize("hasAuthority('CAT_CRE')")
+    @PreAuthorize("hasAuthority('CAT_CRE')")
     public BaseResponse<Void> create(
             @Valid @RequestBody CreateCategoryRequest request,
             BindingResult bindingResult
@@ -77,7 +77,7 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @PreAuthorize("hasAuthority('CAT_UDP')")
+    @PreAuthorize("hasAuthority('CAT_UDP')")
     public BaseResponse<Void> updateUser(
             @Valid @RequestBody UpdateCategoryRequest request,
             BindingResult bindingResult
@@ -98,7 +98,7 @@ public class CategoryController {
     }
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @PreAuthorize("hasAuthority('CAT_DEL')")
+    @PreAuthorize("hasAuthority('CAT_DEL')")
     public BaseResponse<Void> delete(@PathVariable Long id) {
         categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
