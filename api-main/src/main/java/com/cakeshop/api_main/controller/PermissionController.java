@@ -2,6 +2,9 @@ package com.cakeshop.api_main.controller;
 
 import com.cakeshop.api_main.dto.request.PermissionCreateRequest;
 import com.cakeshop.api_main.dto.response.BaseResponse;
+import com.cakeshop.api_main.exception.BadRequestException;
+import com.cakeshop.api_main.exception.ErrorCode;
+import com.cakeshop.api_main.repository.internal.IPermissionRepository;
 import com.cakeshop.api_main.service.authority.IPermissionService;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;
@@ -22,9 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class PermissionController {
 
     IPermissionService permissionService;
+    IPermissionRepository permissionRepository;
 
     @PostMapping("/create")
     BaseResponse<String> createPermission(@RequestBody PermissionCreateRequest request) {
+        if (permissionRepository.existsByCode(request.getCode()) || permissionRepository.existsByName(request.getName())) {
+            throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+        }
+
         return BaseResponse.<String>builder()
                 .result(true)
                 .code(200)

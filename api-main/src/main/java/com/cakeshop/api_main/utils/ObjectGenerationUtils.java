@@ -70,7 +70,7 @@ public class ObjectGenerationUtils {
 
         if (!CollectionUtils.isEmpty(permissions)) {
             permissions.forEach(permission -> {
-                stringJoiner.add("PERMISSION_" + permission.getCode());
+                stringJoiner.add(permission.getCode());
             });
         }
 

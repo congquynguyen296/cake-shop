@@ -1,0 +1,92 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Authentication" id="1743217493777-6">
+        <createTable tableName="tbl_product">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_productPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="price" type="FLOAT(53)"/>
+            <column name="quantity" type="BIGINT"/>
+            <column name="status" type="INT"/>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="category_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743217493777-7">
+        <createTable tableName="tbl_tag">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_tagPK"/>
+            </column>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743217493777-8">
+        <createTable tableName="tbl_product_tag">
+            <column name="product_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tag_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743217493777-9">
+        <addPrimaryKey
+                columnNames="product_id,tag_id"
+                tableName="tbl_product_tag"
+                constraintName="tbl_product_tagPK"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743217493777-10">
+        <addForeignKeyConstraint
+                baseColumnNames="category_id"
+                baseTableName="tbl_product"
+                constraintName="FK_product_category"
+                referencedColumnNames="id"
+                referencedTableName="tbl_category"
+                deferrable="false"
+                initiallyDeferred="false"
+                validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743217493777-11">
+        <addForeignKeyConstraint
+                baseColumnNames="product_id"
+                baseTableName="tbl_product_tag"
+                constraintName="FK_product_tag_product"
+                referencedColumnNames="id"
+                referencedTableName="tbl_product"
+                deferrable="false"
+                initiallyDeferred="false"
+                validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743217493777-12">
+        <addForeignKeyConstraint
+                baseColumnNames="tag_id"
+                baseTableName="tbl_product_tag"
+                constraintName="FK_product_tag_tag"
+                referencedColumnNames="id"
+                referencedTableName="tbl_tag"
+                deferrable="false"
+                initiallyDeferred="false"
+                validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743239004391-2">
+        <createTable tableName="tbl_product_images">
+            <column name="product_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743239004391-3">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="tbl_product_images" constraintName="FKi3jdm52d4pq155q38j13nf7x3" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_product" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

@@ -4,6 +4,7 @@ import com.cakeshop.api_main.dto.request.*;
 import com.cakeshop.api_main.dto.response.BaseResponse;
 import com.cakeshop.api_main.dto.response.LoginResponse;
 import com.cakeshop.api_main.service.authentication.IAuthenticationService;
+import com.cakeshop.api_main.utils.BaseResponseUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nimbusds.jose.JOSEException;
 import jakarta.validation.Valid;
@@ -31,46 +32,32 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     BaseResponse<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
-        return BaseResponse.<LoginResponse>builder()
-                .result(true)
-                .code(200)
-                .message("Login successful")
-                .data(authenticationService.login(request))
-                .build();
+        return BaseResponseUtils.success(authenticationService.login(request), "Login successful");
     }
 
     @PostMapping("/refresh-token")
     BaseResponse<LoginResponse> refresh(@RequestBody @Valid RefreshTokenRequest request) throws ParseException, JOSEException {
-        return BaseResponse.<LoginResponse>builder()
-                .result(true)
-                .code(200)
-                .message("Refresh token successful")
-                .data(authenticationService.refresh(request))
-                .build();
+        return BaseResponseUtils.success(authenticationService.refresh(request), "Refresh token successful");
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody @Valid RegisterRequest request) {
-        String message = authenticationService.register(request);
-        return ResponseEntity.ok(message);
+    public BaseResponse<Void> register(@RequestBody @Valid RegisterRequest request) {
+        return BaseResponseUtils.success(null, authenticationService.register(request));
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestBody @Valid LogoutRequest request) {
-        String message = authenticationService.logout(request);
-        return ResponseEntity.ok(message);
+    public BaseResponse<Void> logout(@RequestBody @Valid LogoutRequest request) {
+        return BaseResponseUtils.success(null, authenticationService.logout(request));
     }
 
     @PostMapping("/active-account")
-    public ResponseEntity<String> activeAccount(@RequestBody @Valid ActiveAccountRequest request) {
-        String message = authenticationService.activeAccount(request);
-        return ResponseEntity.ok(message);
+    public BaseResponse<Void> activeAccount(@RequestBody @Valid ActiveAccountRequest request) {
+        return BaseResponseUtils.success(null, authenticationService.activeAccount(request));
     }
 
     @PostMapping("/resend-otp-code")
-    public ResponseEntity<String> resendOtpCode(@RequestBody @Valid ResendOtpCodeRequest request) {
-        String message = authenticationService.resendOtpCode(request);
-        return ResponseEntity.ok(message);
+    public BaseResponse<Void> resendOtpCode(@RequestBody @Valid ResendOtpCodeRequest request) {
+        return BaseResponseUtils.success(null, authenticationService.resendOtpCode(request));
     }
 
 }

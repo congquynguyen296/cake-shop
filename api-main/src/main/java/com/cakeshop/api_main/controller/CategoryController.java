@@ -12,6 +12,7 @@ import com.cakeshop.api_main.mapper.CategoryMapper;
 import com.cakeshop.api_main.model.Category;
 import com.cakeshop.api_main.model.criteria.CategoryCriteria;
 import com.cakeshop.api_main.repository.internal.ICategoryRepository;
+import com.cakeshop.api_main.repository.internal.IProductRepository;
 import com.cakeshop.api_main.utils.BaseResponseUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.Valid;
@@ -34,10 +35,12 @@ import org.springframework.web.bind.annotation.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CategoryController {
     ICategoryRepository categoryRepository;
+    IProductRepository productRepository;
+
     CategoryMapper categoryMapper;
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public BaseResponse<PaginationResponse<CategoryResponse>> getListForAdmin(
+    public BaseResponse<PaginationResponse<CategoryResponse>> list(
             @Valid @ModelAttribute CategoryCriteria categoryCriteria,
             Pageable pageable
     ) {
@@ -53,7 +56,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public BaseResponse<CategoryResponse> get(@PathVariable Long id) {
+    public BaseResponse<CategoryResponse> get(@PathVariable String id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_EXISTED));
 
@@ -99,13 +102,13 @@ public class CategoryController {
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('CAT_DEL')")
-    public BaseResponse<Void> delete(@PathVariable Long id) {
+    public BaseResponse<Void> delete(@PathVariable String id) {
         categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
 
-//        if (productRepository.existsByCategoryId(id)) {
-//            throw new ResourceBadRequestException(ErrorCode.CATEGORY_ERROR_CANT_DELETE_RELATIONSHIP_WITH_PRODUCT);
-//        }
+        if (productRepository.existsByCategoryId(id)) {
+            throw new BadRequestException(ErrorCode.DELETE_RELATIONSHIP_ERROR);
+        }
 
         // Delete CATEGORY
         categoryRepository.deleteById(id);

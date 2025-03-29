@@ -1,4 +1,4 @@
-package com.cakeshop.api_main.dto.response.category;
+package com.cakeshop.api_main.dto.response.tag;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
-public class CategoryResponse {
+public class TagResponse {
     @Schema(description = "id")
     String id;
 
@@ -16,10 +16,4 @@ public class CategoryResponse {
 
     @Schema(description = "name")
     String name;
-
-    @Schema(description = "description")
-    String description;
-
-    @Schema(description = "image")
-    private String image;
 }

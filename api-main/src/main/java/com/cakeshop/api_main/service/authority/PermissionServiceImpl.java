@@ -20,14 +20,12 @@ public class PermissionServiceImpl implements IPermissionService {
 
     @Override
     public String createPermission(PermissionCreateRequest request) {
-
         Permission newPermission = Permission.builder()
                 .code(request.getCode())
                 .name(request.getName())
                 .description(request.getDescription())
                 .action(request.getAction())
                 .build();
-
         return permissionRepository.save(newPermission).getCode();
     }
 }

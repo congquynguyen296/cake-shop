@@ -1,6 +1,6 @@
 package com.cakeshop.api_main.model.criteria;
 
-import com.cakeshop.api_main.model.Category;
+import com.cakeshop.api_main.model.Tag;
 import com.cakeshop.api_main.model.criteria.base.BaseCriteria;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -16,13 +16,13 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CategoryCriteria extends BaseCriteria<Category> {
+public class TagCriteria extends BaseCriteria<Tag> {
     private String code;
     private String name;
 
     @Override
-    public Specification<Category> getSpecification() {
-        return (Root<Category> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
+    public Specification<Tag> getSpecification() {
+        return (Root<Tag> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
             if (StringUtils.hasText(getCode())) {

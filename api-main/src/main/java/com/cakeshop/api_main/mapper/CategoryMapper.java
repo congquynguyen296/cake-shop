@@ -28,6 +28,7 @@ public interface CategoryMapper {
     void updateFromUpdateCategoryRequest(@MappingTarget Category category, UpdateCategoryRequest request);
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "code", target = "code")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "image", target = "image")
