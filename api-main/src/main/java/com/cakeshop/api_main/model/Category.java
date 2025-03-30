@@ -29,5 +29,5 @@ public class Category extends Abstract {
     String description;
 
     @Column(name = "image")
-    private String image;
+    String image;
 }

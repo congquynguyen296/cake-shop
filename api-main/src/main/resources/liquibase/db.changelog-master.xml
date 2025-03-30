@@ -12,5 +12,8 @@
     <changeSet id="load-sql-file" author="Authentication">
         <sqlFile path="data/import-data.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet id="load-sql-nation-file" author="Authentication">
+        <sqlFile path="data/import-data-nation.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 
 </databaseChangeLog>

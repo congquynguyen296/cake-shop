@@ -1,5 +1,6 @@
 package com.cakeshop.api_main.service.authentication;
 
+import com.cakeshop.api_main.constant.BaseConstant;
 import com.cakeshop.api_main.dto.request.*;
 import com.cakeshop.api_main.dto.response.ExchangeTokenResponse;
 import com.cakeshop.api_main.dto.response.IntrospectResponse;
@@ -8,11 +9,13 @@ import com.cakeshop.api_main.dto.response.OutboundUserResponse;
 import com.cakeshop.api_main.exception.AppException;
 import com.cakeshop.api_main.exception.ErrorCode;
 import com.cakeshop.api_main.model.Account;
+import com.cakeshop.api_main.model.Customer;
 import com.cakeshop.api_main.model.Group;
 import com.cakeshop.api_main.model.TokenValidation;
 import com.cakeshop.api_main.repository.external.IOutboundIdentityClientRepository;
 import com.cakeshop.api_main.repository.external.IOutboundUserClientRepository;
 import com.cakeshop.api_main.repository.internal.IAccountRepository;
+import com.cakeshop.api_main.repository.internal.ICustomerRepository;
 import com.cakeshop.api_main.repository.internal.IGroupRepository;
 import com.cakeshop.api_main.repository.internal.ITokenValidationRepository;
 import com.cakeshop.api_main.service.email.IEmailService;
@@ -33,6 +36,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -45,6 +49,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     IAccountRepository accountRepository;
     ITokenValidationRepository tokenValidationRepository;
     IGroupRepository groupRepository;
+    ICustomerRepository customerRepository;
     IEmailService emailService;
     PasswordEncoder passwordEncoder;
     ObjectGenerationUtils objectGenerationUtils;
@@ -123,11 +128,9 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
     @Override
     public String register(RegisterRequest request) {
-
-        var existedAccount = accountRepository.findByEmail(request.getEmail());
-
-        if (existedAccount != null) {
-            log.info("Email existed");
+        if (accountRepository.existsByEmail(request.getEmail()) ||
+                accountRepository.existsByUsername(request.getUsername())) {
+            log.info("Email or Username existed");
             throw new AppException(ErrorCode.RESOURCE_EXISTED);
         }
 
@@ -146,7 +149,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
                     .build();
 
             // Default group
-            Group defaultGroup = groupRepository.findByKind(2);
+            Group defaultGroup = groupRepository.findByKind(BaseConstant.GROUP_KIND_CUSTOMER);
             if (defaultGroup == null) {
                 throw new AppException(ErrorCode.RESOURCE_EXISTED);
             }
@@ -231,7 +234,18 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
                 throw new AppException(ErrorCode.RESOURCE_NOT_EXISTED);
             }
             existedAccount.setIsActive(true);
+
+            Customer customer = Customer.builder()
+                    .account(existedAccount)
+                    .firstName("")
+                    .lastName("")
+                    .dob(null)
+                    .loyalty(0L)
+                    .addresses(new ArrayList<>())
+                    .build();
+
             accountRepository.save(existedAccount);
+            customerRepository.save(customer);
 
             return "Active account is successful";
 
@@ -298,7 +312,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
                         .avatarPath(accountInfoFromGoogle.getPicture())
                         .password(passwordEncoder.encode(defaultPassword))
                         .build();
-                Group defaultGroup = groupRepository.findByKind(2);
+                Group defaultGroup = groupRepository.findByKind(BaseConstant.GROUP_KIND_CUSTOMER);
                 if (defaultGroup == null) {
                     throw new AppException(ErrorCode.RESOURCE_EXISTED);
                 }
@@ -308,7 +322,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
             // Generate token
             String token = objectGenerationUtils.generateToken(account);
-                return LoginResponse.builder()
+            return LoginResponse.builder()
                     .token(token)
                     .build();
 

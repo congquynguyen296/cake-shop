@@ -39,7 +39,10 @@ public class SecurityConfig {
         "/swagger-ui/**",
         "/swagger-ui.html",
         "/swagger-resources/**",
-        "/webjars/**"
+        "/webjars/**",
+        "/product/**",
+        "/category/**",
+        "/tag/**"
     };
 
     CustomJwtDecoder jwtDecoder;
@@ -49,8 +52,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.PUT, PUBLIC_ENDPOINTS).permitAll()
                         .anyRequest().authenticated()
                 )

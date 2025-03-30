@@ -15,4 +15,9 @@ public class NotFoundException extends RuntimeException {
         super(errorCode.getMessage(), null, false, false); // Disable Stack trace
         this.errorCode = errorCode;
     }
+
+    public NotFoundException(String message, ErrorCode errorCode) {
+        super(message, null, false, false); // Disable Stack trace
+        this.errorCode = errorCode;
+    }
 }
