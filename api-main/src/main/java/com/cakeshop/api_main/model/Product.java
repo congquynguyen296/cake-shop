@@ -53,5 +53,8 @@ public class Product extends Abstract {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     List<Tag> tags = new ArrayList<>();
-    ;
+
+    @ManyToOne
+    @JoinColumn(name = "discount_id")
+    Discount discount;
 }

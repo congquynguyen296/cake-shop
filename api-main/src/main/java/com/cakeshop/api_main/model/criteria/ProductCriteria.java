@@ -19,6 +19,7 @@ import java.util.List;
 public class ProductCriteria extends BaseCriteria<Product> {
     private String name;
     private Integer status;
+    private String categoryId;
 
     @Override
     public Specification<Product> getSpecification() {
@@ -28,8 +29,11 @@ public class ProductCriteria extends BaseCriteria<Product> {
             if (StringUtils.hasText(getName())) {
                 predicates.add(cb.like(cb.lower(root.get("name")), "%" + getName().toLowerCase() + "%"));
             }
-            if (StringUtils.hasText(getId())) {
+            if (getStatus() != null) {
                 predicates.add(cb.equal(root.get("status"), getStatus()));
+            }
+            if (StringUtils.hasText(getCategoryId())) {
+                predicates.add(cb.equal(root.get("category").get("id"), getCategoryId()));
             }
 
             return cb.and(predicates.toArray(Predicate[]::new));

@@ -23,6 +23,7 @@ public interface ProductMapper {
     @Mapping(source = "price", target = "price")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "quantity", target = "quantity")
+    @Mapping(source = "status", target = "status")
     @BeanMapping(ignoreByDefault = true)
     @Named("updateFromUpdateProductRequest")
     void updateFromUpdateProductRequest(@MappingTarget Product product, UpdateProductRequest request);
@@ -32,6 +33,7 @@ public interface ProductMapper {
     @Mapping(source = "price", target = "price")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "quantity", target = "quantity")
+    @Mapping(source = "status", target = "status")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToProductResponse")
     ProductResponse fromEntityToProductResponse(Product product);

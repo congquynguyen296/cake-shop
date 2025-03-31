@@ -30,7 +30,7 @@ public class Address extends Abstract {
     @Column(name = "details")
     String details;
 
-    @Column(name = "is_details")
+    @Column(name = "is_default")
     Boolean isDefault;
 
     @ManyToOne(fetch = FetchType.EAGER)
