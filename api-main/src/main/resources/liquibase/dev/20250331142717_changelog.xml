@@ -1,0 +1,143 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Authentication" id="1743431251804-2">
+        <createTable tableName="tbl_cart">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_cartPK"/>
+            </column>
+            <column name="customer_id" type="VARCHAR(255)"/>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-3">
+        <createTable tableName="tbl_cart_item">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_cart_itemPK"/>
+            </column>
+            <column name="product_id" type="VARCHAR(255)"/>
+            <column name="quantity" type="INT"/>
+            <column name="cart_id" type="VARCHAR(255)"/>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-4">
+        <createTable tableName="tbl_discount">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_discountPK"/>
+            </column>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="discount_percentage" type="INT"/>
+            <column name="end_date" type="datetime(6)"/>
+            <column name="start_date" type="datetime(6)"/>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-5">
+        <createTable tableName="tbl_order">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_orderPK"/>
+            </column>
+            <column name="customer_id" type="VARCHAR(255)"/>
+            <column name="shipping_fee" type="INT"/>
+            <column name="current_status_id" type="VARCHAR(255)"/>
+            <column name="payment_method" type="INT"/>
+            <column name="total_discount" type="FLOAT(53)"/>
+            <column name="total_amount" type="FLOAT(53)"/>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-6">
+        <createTable tableName="tbl_order_item">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_order_itemPK"/>
+            </column>
+            <column name="product_id" type="VARCHAR(255)"/>
+            <column name="quantity" type="INT"/>
+            <column name="order_id" type="VARCHAR(255)"/>
+            <column name="note" type="VARCHAR(255)"/>
+            <column name="unit_price" type="FLOAT(53)"/>
+            <column name="unit_discount_percentage" type="INT"/>
+            <column name="total_price" type="FLOAT(53)"/>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-7">
+        <createTable tableName="tbl_order_status">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_order_statusPK"/>
+            </column>
+            <column name="status" type="INT"/>
+            <column name="date" type="datetime(6)"/>
+            <column name="order_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-8">
+        <addColumn tableName="tbl_product">
+            <column name="discount_id" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-10">
+        <addUniqueConstraint columnNames="customer_id" constraintName="UC_TBL_CARTCUSTOMER_ID_COL" tableName="tbl_cart"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-11">
+        <addUniqueConstraint columnNames="code" constraintName="UC_TBL_DISCOUNTCODE_COL" tableName="tbl_discount"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-12">
+        <addUniqueConstraint columnNames="current_status_id" constraintName="UC_TBL_ORDERCURRENT_STATUS_ID_COL" tableName="tbl_order"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-13">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="tbl_order_item" constraintName="FK1oy9x003q55eqmuiv0y8a15e" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_product" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-14">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="tbl_cart_item" constraintName="FK84umwt3ihkiggf03us5gq116j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_product" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-15">
+        <addForeignKeyConstraint baseColumnNames="discount_id" baseTableName="tbl_product" constraintName="FKbrui6o6s3phhvcg70607apk54" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_discount" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-16">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="tbl_cart" constraintName="FKc0u8nvqqpntefjgw9b0r5tuif" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_customer" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-17">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="tbl_order" constraintName="FKdbbvj4affcu7x13tjn0a12htw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_customer" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-18">
+        <addForeignKeyConstraint baseColumnNames="cart_id" baseTableName="tbl_cart_item" constraintName="FKhaw0aw4g8s9icxekpl4oi715a" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_cart" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-19">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="tbl_order_item" constraintName="FKmkqpajkg6p2wq4owcv1v08pc5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_order" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-20">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="tbl_order_status" constraintName="FKnjxka6px9dxqsgafblyi82gsj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_order" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743431251804-21">
+        <addForeignKeyConstraint baseColumnNames="current_status_id" baseTableName="tbl_order" constraintName="FKsfx46on72poxcg5t94o8efvj6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_order_status" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743433424773-6">
+        <createTable tableName="tbl_review">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="tbl_reviewPK"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="content" type="TEXT"/>
+            <column name="rate" type="INT"/>
+            <column name="customer_id" type="VARCHAR(255)"/>
+            <column name="product_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743433424773-7">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="tbl_review" constraintName="FKa12qg0difn0jw3m9puletyuxx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_product" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743433424773-8">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="tbl_review" constraintName="FKa8d24imtac9cwo0pjcc9s7qsy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_customer" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

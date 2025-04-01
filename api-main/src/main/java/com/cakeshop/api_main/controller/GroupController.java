@@ -27,9 +27,10 @@ public class GroupController {
     @PostMapping("/create")
     BaseResponse<GroupResponse> createGroup(@RequestBody GroupCreateRequest request) {
         return BaseResponse.<GroupResponse>builder()
+                .result(true)
                 .code(200)
                 .message("Create group successfully")
-                .result(groupService.createGroup(request))
+                .data(groupService.createGroup(request))
                 .build();
     }
 }

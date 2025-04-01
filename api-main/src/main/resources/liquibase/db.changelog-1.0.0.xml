@@ -1,0 +1,99 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Authentication" id="1743123659405-1">
+        <createTable tableName="tbl_account">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="is_active" type="BIT(1)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="avatar_path" type="VARCHAR(255)"/>
+            <column name="group_id" type="VARCHAR(255)"/>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-2">
+        <createTable tableName="tbl_category">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="TEXT"/>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-3">
+        <createTable tableName="tbl_group">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="is_system_role" type="BIT(1)"/>
+            <column name="kind" type="INT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-4">
+        <createTable tableName="tbl_permission">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="action" type="VARCHAR(255)"/>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-5">
+        <createTable tableName="tbl_permission_group">
+            <column name="group_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="permission_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-6">
+        <createTable tableName="tbl_token_validation">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="expiry_date" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-7">
+        <createIndex associatedWith="" indexName="FK81wmwdwm4sold1jycrrtwe1at" tableName="tbl_permission_group">
+            <column name="permission_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-8">
+        <createIndex associatedWith="" indexName="FKhx9ynkpstuwceilnjbra8nbh5" tableName="tbl_account">
+            <column name="group_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-9">
+        <createIndex associatedWith="" indexName="FKr1sqlmeir2hepwleu3o2nrcvu" tableName="tbl_permission_group">
+            <column name="group_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-10">
+        <addForeignKeyConstraint baseColumnNames="permission_id" baseTableName="tbl_permission_group" constraintName="FK81wmwdwm4sold1jycrrtwe1at" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="tbl_permission" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-11">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="tbl_account" constraintName="FKhx9ynkpstuwceilnjbra8nbh5" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="tbl_group" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1743123659405-12">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="tbl_permission_group" constraintName="FKr1sqlmeir2hepwleu3o2nrcvu" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="tbl_group" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

@@ -13,7 +13,9 @@ public enum ErrorCode {
     RESOURCE_EXISTED(405, "Resource already exists", HttpStatus.ALREADY_REPORTED),
     UNAUTHENTICATED(401, "Unauthenticated", HttpStatus.UNAUTHORIZED),
     FORBIDDEN(403, "Forbidden", HttpStatus.FORBIDDEN),
-    INTERNAL_SERVER_ERROR(500, "Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR),;
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR),
+    INVALID_FORM_ERROR(400, "Invalid Form Error", HttpStatus.BAD_REQUEST),
+    DELETE_RELATIONSHIP_ERROR(1000, "Delete Relationship Error", HttpStatus.BAD_REQUEST),;
 
     ErrorCode(int code, String message, HttpStatusCode httpStatusCode) {
         this.code = code;

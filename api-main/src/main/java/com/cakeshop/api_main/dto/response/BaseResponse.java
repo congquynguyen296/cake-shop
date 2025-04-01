@@ -12,9 +12,11 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 public class BaseResponse<T> {
 
-    int code;
+    boolean result;
+
+    Integer code;
 
     String message;
 
-    T result;
+    T data;
 }

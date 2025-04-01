@@ -48,7 +48,7 @@ public class ObjectGenerationUtils {
                 .subject(account.getUsername())
                 .issuer("SystemAdmin")
                 .issueTime(new Date())
-                .expirationTime(Date.from(Instant.now().plus(validDuration, ChronoUnit.SECONDS))) // Sử dụng biến instance
+                .expirationTime(Date.from(Instant.now().plus(validDuration, ChronoUnit.DAYS))) // Sử dụng biến instance
                 .claim("scope", buildScope(account))
                 .jwtID(UUID.randomUUID().toString())
                 .build();
@@ -70,7 +70,7 @@ public class ObjectGenerationUtils {
 
         if (!CollectionUtils.isEmpty(permissions)) {
             permissions.forEach(permission -> {
-                stringJoiner.add("PERMISSION_" + permission.getCode());
+                stringJoiner.add(permission.getCode());
             });
         }
 

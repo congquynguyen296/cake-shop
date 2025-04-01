@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IPermissionRepository extends JpaRepository<Permission, String> {
     Permission findByCode(String code);
+    boolean existsByCode(String code);
+    boolean existsByName(String name);
 }
