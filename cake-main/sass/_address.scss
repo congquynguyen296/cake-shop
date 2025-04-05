@@ -1,0 +1,168 @@
+.address-item {
+	border-bottom: 1px solid $border;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+
+	&__info {
+		flex: 1; // Chiếm phần còn lại bên trái
+	}
+
+	&__title {
+		font-family: $fm-nunito;
+		font-size: 18px;
+		color: $heading-color;
+		font-weight: 600;
+		margin-bottom: 10px;
+	}
+
+	&__name,
+	&__phone {
+		font-weight: 600;
+	}
+
+	&__separator {
+		color: $para-color;
+		margin: 0 5px;
+	}
+
+	&__default-label {
+		color: $primary-color;
+		font-size: 14px;
+		font-weight: 400;
+		margin-left: 10px;
+		border: 2px solid $primary-color;
+		width: max-content;
+		padding: 5px 8px;
+	}
+
+	&__location,
+	&__details {
+		font-family: $fm-nunito;
+		font-size: 14px;
+		color: $para-color;
+		margin-bottom: 5px;
+		margin-left: 10px;
+	}
+
+	&__details {
+		margin-bottom: 0;
+	}
+
+	&__actions {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	&__actions-row {
+		display: flex;
+		align-items: center;
+		margin-bottom: 5px;
+	}
+
+	&__action {
+		font-family: $fm-nunito;
+		font-size: 14px;
+		margin-left: 15px;
+		text-decoration: none;
+		@include transition(all, 0.3s);
+
+		&--update {
+			color: $para-color;
+
+			&:hover {
+				color: darken($primary-color, 10%);
+			}
+		}
+
+		&--delete {
+			color: $para-color;
+
+			&:hover {
+				color: darken(#ff0000, 5%);
+			}
+		}
+
+		&--set-default {
+			color: $para-color;
+			border: 1px solid $para-color;
+			padding: 5px 8px;
+
+			&:hover {
+				color: $heading-color;
+			}
+
+			&--disabled {
+				color: $para-color;
+				opacity: 0.5;
+				cursor: not-allowed;
+				pointer-events: none;
+
+				&:hover {
+					color: $para-color;
+				}
+			}
+		}
+	}
+}
+
+.form-action {
+	display: flex;
+	justify-content: flex-end; // Đẩy các button qua bên phải
+	gap: 10px; // Khoảng cách giữa hai nút
+
+	.btn-primary {
+		&:last-child {
+			background-color: $primary-color;
+			border-color: $primary-color;
+
+			&:hover {
+				background-color: darken($primary-color, 10%);
+				border-color: darken($primary-color, 10%);
+			}
+		}
+	}
+}
+
+.form-check {
+	display: flex;
+	align-items: center; // Căn giữa theo chiều dọc
+	gap: 8px;
+
+	&-input {
+		width: 18px;
+		height: 18px;
+		border: 2px solid #ccc;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		position: relative;
+		flex-shrink: 0; // Ngăn checkbox bị co lại
+		align-self: center; // Đảm bảo checkbox căn giữa trong flex container
+
+		&:checked {
+			background-color: $primary-color;
+			border-color: $primary-color;
+
+			&::after {
+				content: "✔";
+				font-size: 12px;
+				position: absolute;
+				font-weight: bold;
+				color: white;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%); // Căn giữa dấu check
+			}
+		}
+	}
+
+	&-label {
+		cursor: pointer;
+		font-size: 16px;
+		color: #333;
+	}
+}

@@ -57,4 +57,8 @@ public class Product extends Abstract {
     @ManyToOne
     @JoinColumn(name = "discount_id")
     Discount discount;
+
+    public boolean checkQuantity(int quantity) {
+        return this.quantity >= quantity;
+    }
 }

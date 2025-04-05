@@ -9,7 +9,8 @@ import org.mapstruct.*;
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        uses = {DiscountMapper.class})
 public interface ProductMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "price", target = "price")
@@ -33,6 +34,7 @@ public interface ProductMapper {
     @Mapping(source = "price", target = "price")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "quantity", target = "quantity")
+    @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
     @Mapping(source = "status", target = "status")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToProductResponse")
@@ -40,4 +42,12 @@ public interface ProductMapper {
 
     @IterableMapping(elementTargetType = ProductResponse.class, qualifiedByName = "fromEntityToProductResponse")
     List<ProductResponse> fromEntitiesToProductResponseList(List<Product> products);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "price", target = "price")
+    @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
+    @BeanMapping(ignoreByDefault = true)
+    @Named("fromEntityToProductResponseAutoComplete")
+    ProductResponse fromEntityToProductResponseAutoComplete(Product product);
 }
