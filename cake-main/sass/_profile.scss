@@ -1,0 +1,66 @@
+.section-title {
+	span {
+		color: $primary-color;
+		font-size: 46px;
+		font-weight: 650;
+		text-transform: uppercase;
+		letter-spacing: 4px;
+		display: block;
+		margin-bottom: 10px;
+	}
+
+	h3 {
+		font-size: 24px;
+		color: $heading-color;
+		font-weight: 600;
+	}
+}
+
+.profile {
+	display: flex;
+	flex-wrap: nowrap; // Đảm bảo không bị wrap xuống dòng
+	align-items: stretch; // Đảm bảo cả hai cột có chiều cao bằng nhau
+	gap: 20px;
+	min-height: 100%; // Đảm bảo chiều cao tối thiểu
+
+	&__form-wrapper {
+		padding: 20px; // Padding cho form
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start; // Đẩy nội dung form lên trên
+		flex: 1; // Chiếm toàn bộ không gian có sẵn
+	}
+
+	&__image-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start; // Căn giữa ảnh theo chiều dọc
+		border-right: 2px solid rgba(0, 0, 0, 0.1); // Đường ngăn cách mờ
+		padding-left: 20px; // Khoảng cách giữa đường ngăn và ảnh
+		flex: 0 0 auto; // Không co giãn, giữ kích thước cố định
+		margin-top: 40px;
+	}
+
+	&__image {
+		img {
+			width: 120px; // Kích thước ảnh nhỏ hơn
+			height: 120px;
+			border-radius: 50%; // Ảnh tròn
+			object-fit: cover; // Không bị méo
+			border: 3px solid #ddd; // Viền ảnh
+		}
+	}
+}
+
+// Tùy chỉnh nút submit cho đồng bộ với Bootstrap
+.btn-primary {
+	&:last-child {
+		background-color: $primary-color;
+		border-color: $primary-color;
+
+		&:hover {
+			background-color: darken($primary-color, 10%);
+			border-color: darken($primary-color, 10%);
+		}
+	}
+}

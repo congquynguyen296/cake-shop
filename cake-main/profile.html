@@ -6,7 +6,7 @@
 		<meta name="keywords" content="Cake, unica, creative, html" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>Cake | Template</title>
+		<title>Hồ sơ | Cake Shop</title>
 
 		<!-- Google Font -->
 		<link
@@ -73,7 +73,13 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#">Sign in</a> <span class="arrow_carrot-down"></span>
+						<a href="#" class="user-email">example@example.com</a>
+						<span class="arrow_carrot-down"></span>
+						<ul class="user-dropdown">
+							<li><a href="profile.html">Tài khoản của tôi</a></li>
+							<li><a href="orders.html">Đơn mua</a></li>
+							<li><a href="login.html">Đăng xuất</a></li>
+						</ul>
 					</li>
 				</ul>
 			</div>
@@ -90,22 +96,13 @@
 								<div class="header__top__left">
 									<ul>
 										<li>
-											USD <span class="arrow_carrot-down"></span>
-											<ul>
-												<li>EUR</li>
-												<li>USD</li>
-											</ul>
-										</li>
-										<li>
-											ENG <span class="arrow_carrot-down"></span>
-											<ul>
-												<li>Spanish</li>
-												<li>ENG</li>
-											</ul>
-										</li>
-										<li>
-											<a href="#">Sign in</a>
+											<a href="#" class="user-email">example@example.com</a>
 											<span class="arrow_carrot-down"></span>
+											<ul class="user-dropdown">
+												<li><a href="profile.html">Tài khoản của tôi</a></li>
+												<li><a href="orders.html">Đơn mua</a></li>
+												<li><a href="login.html">Đăng xuất</a></li>
+											</ul>
 										</li>
 									</ul>
 								</div>
@@ -137,22 +134,19 @@
 					<div class="col-lg-12">
 						<nav class="header__menu mobile-menu">
 							<ul>
-								<li><a href="./index.html">Home</a></li>
-								<li><a href="./about.html">About</a></li>
-								<li class="active"><a href="./shop.html">Shop</a></li>
+								<li class="active"><a href="./profile.html">Hồ sơ</a></li>
+								<li><a href="./address.html">Địa chỉ</a></li>
 								<li>
 									<a href="#">Pages</a>
 									<ul class="dropdown">
 										<li><a href="./shop-details.html">Shop Details</a></li>
-										<li><a href="./shoping-cart.html">Giỏ hàng</a></li>
+										<li><a href="./shoping-cart.html">Shopping Cart</a></li>
 										<li><a href="./checkout.html">Check Out</a></li>
-										<li><a href="./wisslist.html">Wisslist</a></li>
+										<li><a href="./wisslist.html">Wishlist</a></li>
 										<li><a href="./Class.html">Class</a></li>
 										<li><a href="./blog-details.html">Blog Details</a></li>
 									</ul>
 								</li>
-								<li><a href="./blog.html">Blog</a></li>
-								<li><a href="./contact.html">Contact</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -161,160 +155,125 @@
 		</header>
 		<!-- Header Section End -->
 
-		<!-- Breadcrumb Begin -->
-		<div class="breadcrumb-option">
+		<!-- Profile Section Begin -->
+		<!-- Profile Section Begin -->
+		<section class="profile spad">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="breadcrumb__text">
-							<h2>Giỏ hàng</h2>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="breadcrumb__links">
-							<a href="./index.html">Home</a>
-							<span>Giỏ hàng</span>
+					<div class="col-lg-12 text-center">
+						<div class="section-title">
+							<span>Hồ sơ cá nhân</span>
+							<h3>Chỉnh sửa thông tin</h3>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<!-- Breadcrumb End -->
-
-		<!-- Giỏ hàng Section Begin -->
-		<section class="shopping-cart spad">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8">
-						<div class="shopping__cart__table">
-							<table>
-								<thead>
-									<tr>
-										<th>Product</th>
-										<th>Quantity</th>
-										<th>Total</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="img/shop/cart/cart-1.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>T-shirt Contrast Pocket</h6>
-												<h5>$98.49</h5>
-											</div>
-										</td>
-										<td class="quantity__item">
-											<div class="quantity">
-												<div class="pro-qty">
-													<input type="text" value="1" />
-												</div>
-											</div>
-										</td>
-										<td class="cart__price">$ 30.00</td>
-										<td class="cart__close">
-											<span class="icon_close"></span>
-										</td>
-									</tr>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="img/shop/cart/cart-2.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>Diagonal Textured Cap</h6>
-												<h5>$98.49</h5>
-											</div>
-										</td>
-										<td class="quantity__item">
-											<div class="quantity">
-												<div class="pro-qty">
-													<input type="text" value="1" />
-												</div>
-											</div>
-										</td>
-										<td class="cart__price">$ 32.50</td>
-										<td class="cart__close">
-											<span class="icon_close"></span>
-										</td>
-									</tr>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="img/shop/cart/cart-3.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>Basic Flowing Scarf</h6>
-												<h5>$98.49</h5>
-											</div>
-										</td>
-										<td class="quantity__item">
-											<div class="quantity">
-												<div class="pro-qty">
-													<input type="text" value="1" />
-												</div>
-											</div>
-										</td>
-										<td class="cart__price">$ 47.00</td>
-										<td class="cart__close">
-											<span class="icon_close"></span>
-										</td>
-									</tr>
-									<tr>
-										<td class="product__cart__item">
-											<div class="product__cart__item__pic">
-												<img src="img/shop/cart/cart-4.jpg" alt="" />
-											</div>
-											<div class="product__cart__item__text">
-												<h6>Basic Flowing Scarf</h6>
-												<h5>$98.49</h5>
-											</div>
-										</td>
-										<td class="quantity__item">
-											<div class="quantity">
-												<div class="pro-qty">
-													<input type="text" value="1" />
-												</div>
-											</div>
-										</td>
-										<td class="cart__price">$ 30.00</td>
-										<td class="cart__close">
-											<span class="icon_close"></span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="continue__btn">
-									<a href="#">Continue Shopping</a>
+				<div class="row justify-content-center">
+					<div class="col-lg-10 col-md-12">
+						<div class="profile row">
+							<!-- Cột cho ảnh -->
+							<div class="col-lg-4 col-md-4 profile__image-wrapper">
+								<div class="profile__image">
+									<img
+										src="https://kenh14cdn.com/203336854389633024/2024/10/16/chuong-nhuoc-nam1-1729084853586986899768-1729096455287-17290964555741951663122.jpg"
+										alt="Avatar"
+									/>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="continue__btn update__btn">
-									<a href="#"><i class="fa fa-spinner"></i> Update cart</a>
-								</div>
+							<!-- Cột cho form thông tin -->
+							<div class="col-lg-8 col-md-8 profile__form-wrapper">
+								<form action="#" class="profile__form">
+									<div class="form-group">
+										<label for="username">Tên đăng nhập</label>
+										<input
+											type="text"
+											class="form-control"
+											id="username"
+											value="huypham"
+											disabled="true"
+										/>
+									</div>
+									<div class="form-group">
+										<label for="fullName">Họ và tên</label>
+										<input
+											type="text"
+											class="form-control"
+											id="fullName"
+											value="Nguyễn Văn A"
+											placeholder="Nhập họ và tên"
+										/>
+									</div>
+									<div class="form-group">
+										<label for="email">Email</label>
+										<input
+											type="email"
+											class="form-control"
+											id="email"
+											value="example@example.com"
+											placeholder="Nhập email"
+											readonly
+										/>
+									</div>
+									<div class="form-group">
+										<label for="phone">Số điện thoại</label>
+										<input
+											type="text"
+											class="form-control"
+											id="phone"
+											value="0123456789"
+											placeholder="Nhập số điện thoại"
+										/>
+									</div>
+									<div class="form-group">
+										<label for="dob">Ngày sinh</label>
+										<input
+											type="date"
+											class="form-control"
+											id="dob"
+											value="2004-02-08"
+										/>
+									</div>
+									<div class="form-group text-center">
+										<button type="submit" class="btn btn-primary">
+											Lưu thay đổi
+										</button>
+									</div>
+								</form>
 							</div>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="cart__total">
-							<h6>Cart total</h6>
-							<ul>
-								<li>Subtotal <span>$ 169.50</span></li>
-								<li>Total <span>$ 169.50</span></li>
-							</ul>
-							<a href="#" class="primary-btn">Proceed to checkout</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-		<!-- Giỏ hàng Section End -->
+		<!-- Profile Section End -->
+
+		<!-- Map Begin -->
+		<div class="map">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-7">
+						<div class="map__inner">
+							<h6>COlorado</h6>
+							<ul>
+								<li>1000 Lakepoint Dr, Frisco, CO 80443, USA</li>
+								<li>Sweetcake@support.com</li>
+								<li>+1 800-786-1000</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="map__iframe">
+				<iframe
+					src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d10784.188505644011!2d19.053119335158936!3d47.48899529453826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1543907528304"
+					height="300"
+					style="border: 0"
+					allowfullscreen=""
+					aria-hidden="false"
+					tabindex="0"
+				></iframe>
+			</div>
+		</div>
+		<!-- Map End -->
 
 		<!-- Footer Section Begin -->
 		<footer class="footer set-bg" data-setbg="img/footer-bg.jpg">
@@ -389,17 +348,6 @@
 			</div>
 		</footer>
 		<!-- Footer Section End -->
-
-		<!-- Search Begin -->
-		<div class="search-model">
-			<div class="h-100 d-flex align-items-center justify-content-center">
-				<div class="search-close-switch">+</div>
-				<form class="search-model-form">
-					<input type="text" id="search-input" placeholder="Search here....." />
-				</form>
-			</div>
-		</div>
-		<!-- Search End -->
 
 		<!-- Js Plugins -->
 		<script src="js/jquery-3.3.1.min.js"></script>

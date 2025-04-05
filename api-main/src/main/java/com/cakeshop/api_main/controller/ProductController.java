@@ -66,7 +66,9 @@ public class ProductController {
     public BaseResponse<ProductResponse> get(@PathVariable String id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_EXISTED));
-
+        if (!product.getDiscount().isActive()) {
+            product.setDiscount(null);
+        }
         return BaseResponseUtils.success(productMapper.fromEntityToProductResponse(product), "Get product successfully");
     }
 
@@ -98,7 +100,7 @@ public class ProductController {
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('PRO_UDP')")
-    public BaseResponse<Void> updateUser(
+    public BaseResponse<Void> update(
             @Valid @RequestBody UpdateProductRequest request,
             BindingResult bindingResult
     ) {
@@ -123,7 +125,6 @@ public class ProductController {
         productMapper.updateFromUpdateProductRequest(product, request);
         product.setImages(request.getImages());
         productRepository.save(product);
-
         return BaseResponseUtils.success(null, "Update product successfully");
     }
 
