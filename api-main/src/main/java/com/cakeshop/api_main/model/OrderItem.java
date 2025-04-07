@@ -37,4 +37,28 @@ public class OrderItem extends Abstract {
     @ManyToOne
     @JoinColumn(name = "order_id")
     Order order;
+
+    public OrderItem(Product product, Integer quantity, String note, Order order) {
+        this.product = product;
+        this.quantity = quantity;
+        this.note = note;
+        this.order = order;
+        this.unitPrice = product.getPrice();
+        this.unitDiscountPercentage = getDiscountPercentage(product);
+    }
+
+    public void calculateTotalPrice() {
+        double basePrice = unitPrice != null ? unitPrice : 0;
+        int discount = unitDiscountPercentage != null ? unitDiscountPercentage : 0;
+        int quantity = this.quantity != null ? this.quantity : 0;
+
+        double discountAmount = basePrice * discount / 100.0;
+        this.totalPrice = (basePrice - discountAmount) * quantity;
+    }
+
+    private Integer getDiscountPercentage(Product product) {
+        return (product.getDiscount() != null && product.getDiscount().getDiscountPercentage() != null)
+                ? product.getDiscount().getDiscountPercentage()
+                : 0;
+    }
 }

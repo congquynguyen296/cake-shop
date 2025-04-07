@@ -33,4 +33,11 @@ public interface NationMapper {
 
     @IterableMapping(elementTargetType = NationResponse.class, qualifiedByName = "fromEntityToNationResponse")
     List<NationResponse> fromEntitiesToNationResponseList(List<Nation> nations);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "kind", target = "kind")
+    @BeanMapping(ignoreByDefault = true)
+    @Named("fromEntityToNationResponseAutoComplete")
+    NationResponse fromEntityToNationResponseAutoComplete(Nation nation);
 }

@@ -23,7 +23,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -62,10 +61,7 @@ public class TagController {
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('TAG_CRE')")
-    public BaseResponse<Void> create(
-            @Valid @RequestBody CreateTagRequest request,
-            BindingResult bindingResult
-    ) {
+    public BaseResponse<Void> create(@Valid @RequestBody CreateTagRequest request) {
         if (tagRepository.existsByName(request.getName())) {
             throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
         }
@@ -78,10 +74,7 @@ public class TagController {
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('TAG_UDP')")
-    public BaseResponse<Void> updateUser(
-            @Valid @RequestBody UpdateTagRequest request,
-            BindingResult bindingResult
-    ) {
+    public BaseResponse<Void> updateUser(@Valid @RequestBody UpdateTagRequest request) {
         Tag tag = tagRepository.findById(request.getId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
         // Update name
