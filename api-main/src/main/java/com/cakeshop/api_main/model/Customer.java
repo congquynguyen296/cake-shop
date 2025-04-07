@@ -21,12 +21,12 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Customer {
     @Id
-    private String id;
+    String id;
 
     @OneToOne
     @MapsId
     @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
-    private Account account;
+    Account account;
 
     @Column(name = "first_name")
     String firstName;

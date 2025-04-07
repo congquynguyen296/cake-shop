@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
         BaseResponse<Void> response = new BaseResponse<>(
                 false,
                 errorCode.getCode(),
-                errorCode.getMessage(),
+                ex.getMessage(),
                 null
         );
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
@@ -77,7 +77,7 @@ public class GlobalExceptionHandler {
         BaseResponse<Void> response = new BaseResponse<>(
                 false,
                 errorCode.getCode(),
-                errorCode.getMessage(),
+                ex.getMessage(),
                 null
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

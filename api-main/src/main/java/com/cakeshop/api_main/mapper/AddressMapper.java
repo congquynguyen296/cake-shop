@@ -11,9 +11,9 @@ import java.util.List;
         uses = {NationMapper.class})
 public interface AddressMapper {
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "province", target = "province", qualifiedByName = "fromEntityToNationResponse")
-    @Mapping(source = "district", target = "district", qualifiedByName = "fromEntityToNationResponse")
-    @Mapping(source = "commune", target = "commune", qualifiedByName = "fromEntityToNationResponse")
+    @Mapping(source = "province", target = "province", qualifiedByName = "fromEntityToNationResponseAutoComplete")
+    @Mapping(source = "district", target = "district", qualifiedByName = "fromEntityToNationResponseAutoComplete")
+    @Mapping(source = "commune", target = "commune", qualifiedByName = "fromEntityToNationResponseAutoComplete")
     @Mapping(source = "details", target = "details")
     @Mapping(source = "isDefault", target = "isDefault")
     @BeanMapping(ignoreByDefault = true)

@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -60,8 +59,7 @@ public class CartController {
 
     @PostMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<Void> addToCart(
-            @Valid @RequestBody AddToCartRequest request,
-            BindingResult bindingResult
+            @Valid @RequestBody AddToCartRequest request
     ) {
         String username = SecurityUtil.getCurrentUsername();
         Cart cart = cartRepository.findByCustomerAccountUsername(username).orElse(null);

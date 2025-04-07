@@ -24,7 +24,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -66,10 +65,7 @@ public class NationController {
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('NAT_CRE')")
-    public BaseResponse<Void> create(
-            @Valid @RequestBody CreateNationRequest request,
-            BindingResult bindingResult
-    ) {
+    public BaseResponse<Void> create(@Valid @RequestBody CreateNationRequest request) {
         if (nationRepository.existsByName(request.getName())) {
             throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
         }
@@ -88,10 +84,7 @@ public class NationController {
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('NAT_UDP')")
-    public BaseResponse<Void> updateUser(
-            @Valid @RequestBody UpdateNationRequest request,
-            BindingResult bindingResult
-    ) {
+    public BaseResponse<Void> updateUser(@Valid @RequestBody UpdateNationRequest request) {
         Nation nation = nationRepository.findById(request.getId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
         // Update name

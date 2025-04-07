@@ -28,7 +28,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -74,10 +73,7 @@ public class ProductController {
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('PRO_CRE')")
-    public BaseResponse<Void> create(
-            @Valid @RequestBody CreateProductRequest request,
-            BindingResult bindingResult
-    ) {
+    public BaseResponse<Void> create(@Valid @RequestBody CreateProductRequest request) {
         if (productRepository.existsByName(request.getName())) {
             throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
         }
@@ -100,10 +96,7 @@ public class ProductController {
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('PRO_UDP')")
-    public BaseResponse<Void> update(
-            @Valid @RequestBody UpdateProductRequest request,
-            BindingResult bindingResult
-    ) {
+    public BaseResponse<Void> update(@Valid @RequestBody UpdateProductRequest request) {
         Product product = productRepository.findById(request.getId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
         // Update name

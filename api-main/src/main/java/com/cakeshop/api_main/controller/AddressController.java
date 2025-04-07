@@ -27,7 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -75,10 +74,7 @@ public class AddressController {
     }
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
-    public BaseResponse<Void> create(
-            @Valid @RequestBody CreateAddressRequest request,
-            BindingResult bindingResult
-    ) {
+    public BaseResponse<Void> create(@Valid @RequestBody CreateAddressRequest request) {
         // Get current customer
         String username = SecurityUtil.getCurrentUsername();
         Customer customer = customerRepository.findByAccountUsername(username)
@@ -120,10 +116,7 @@ public class AddressController {
     }
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public BaseResponse<Void> updateUser(
-            @Valid @RequestBody UpdateAddressRequest request,
-            BindingResult bindingResult
-    ) {
+    public BaseResponse<Void> updateUser(@Valid @RequestBody UpdateAddressRequest request) {
         Address address = addressRepository.findById(request.getId())
                 .orElseThrow(() -> new NotFoundException("ADDRESS_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
 
