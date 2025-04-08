@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@Schema(description = "Create Category Form")
+@Getter
+@Setter
+@Schema(description = "Create cart item Form")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateCartItemRequest {
     @Schema(description = "productId", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)

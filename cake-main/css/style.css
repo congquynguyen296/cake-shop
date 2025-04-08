@@ -1091,7 +1091,7 @@ ol {
 }
 
 /*---------------------
-  Product
+Product
 -----------------------*/
 .product {
   padding-top: 50px;
@@ -1184,6 +1184,18 @@ ol {
   display: inline-block;
   border-bottom: 2px solid #f08632;
   padding-bottom: 4px;
+}
+
+.product__discount {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 77, 77, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 /*---------------------

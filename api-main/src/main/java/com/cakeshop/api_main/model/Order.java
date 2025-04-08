@@ -67,14 +67,9 @@ public class Order extends Abstract {
     }
 
     private void initializeOrderStatus() {
-        OrderStatus initialStatus = OrderStatus.builder()
-                .status(BaseConstant.ORDER_STATUS_PENDING)
-                .date(new Date())
-                .order(this)
-                .build();
-
-        this.currentStatus = initialStatus;
-        this.orderStatuses.add(initialStatus);
+        OrderStatus orderStatus = new OrderStatus(BaseConstant.ORDER_STATUS_PENDING, new Date(), this);
+        this.currentStatus = orderStatus;
+        this.orderStatuses.add(orderStatus);
     }
 
     private void initializeOrderItems(List<OrderItemDetails> orderItemDetailsList) {

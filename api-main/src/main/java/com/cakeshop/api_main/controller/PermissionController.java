@@ -7,6 +7,7 @@ import com.cakeshop.api_main.exception.ErrorCode;
 import com.cakeshop.api_main.repository.internal.IPermissionRepository;
 import com.cakeshop.api_main.service.authority.IPermissionService;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Hidden
 public class PermissionController {
 
     IPermissionService permissionService;
