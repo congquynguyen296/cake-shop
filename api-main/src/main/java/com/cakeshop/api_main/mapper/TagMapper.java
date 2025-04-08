@@ -31,5 +31,6 @@ public interface TagMapper {
     TagResponse fromEntityToTagResponse(Tag tag);
 
     @IterableMapping(elementTargetType = TagResponse.class, qualifiedByName = "fromEntityToTagResponse")
+    @Named("fromEntitiesToTagResponseList")
     List<TagResponse> fromEntitiesToTagResponseList(List<Tag> tags);
 }

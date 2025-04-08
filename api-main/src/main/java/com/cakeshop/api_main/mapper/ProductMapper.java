@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        uses = {DiscountMapper.class})
+        uses = {CategoryMapper.class, TagMapper.class, DiscountMapper.class})
 public interface ProductMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "price", target = "price")
@@ -34,8 +34,11 @@ public interface ProductMapper {
     @Mapping(source = "price", target = "price")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "quantity", target = "quantity")
+    @Mapping(source = "category", target = "category", qualifiedByName = "fromEntityToCategoryResponseAutoComplete")
+    @Mapping(source = "tags", target = "tags", qualifiedByName = "fromEntitiesToTagResponseList")
     @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
     @Mapping(source = "status", target = "status")
+    @Mapping(source = "images", target = "images")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToProductResponse")
     ProductResponse fromEntityToProductResponse(Product product);

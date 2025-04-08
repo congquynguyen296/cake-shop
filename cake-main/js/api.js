@@ -36,3 +36,7 @@ function getDistricts(provinceId, callback) {
 function getCommunes(districtId, callback) {
 	callApi(`/nation/list?kind=3&parentId=${districtId}`, "GET", null, callback);
 }
+
+function getProducts(callback) {
+	callApi("/product/list", "GET", null, callback);
+}

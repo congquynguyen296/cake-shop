@@ -5,6 +5,7 @@ import com.cakeshop.api_main.dto.response.BaseResponse;
 import com.cakeshop.api_main.dto.response.GroupResponse;
 import com.cakeshop.api_main.service.authority.IGroupService;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Hidden
 public class GroupController {
 
     IGroupService groupService;
