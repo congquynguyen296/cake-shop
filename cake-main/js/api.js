@@ -37,6 +37,14 @@ function getCommunes(districtId, callback) {
 	callApi(`/nation/list?kind=3&parentId=${districtId}`, "GET", null, callback);
 }
 
-function getProducts(callback) {
-	callApi("/product/list", "GET", null, callback);
+function getProducts(callback, categoryId = null) {
+	let url = "/product/list";
+	if (categoryId) {
+		url += `?categoryId=${categoryId}`;
+	}
+	callApi(url, "GET", null, callback);
+}
+
+function getCategories(callback) {
+	callApi("/category/list", "GET", null, callback);
 }

@@ -35,5 +35,4 @@ public interface IProductRepository extends JpaRepository<Product, String>, JpaS
             GROUP BY r.product.id
             """)
     List<ProductReviewResponse> findReviewStatsByProductIds(@Param("productIds") List<String> productIds);
-
 }

@@ -1,12 +1,78 @@
 $(document).ready(function () {
-	function loadProducts() {
+	function loadCategories() {
+		getCategories(function (response) {
+			if (response.result && response.data && response.data.content) {
+				displayCategories(response.data.content);
+			} else {
+				console.error("Không tìm thấy dữ liệu danh mục trong phản hồi API.");
+			}
+		});
+	}
+	function displayCategories(categories) {
+		const categoryContainer = $(".categories__slider");
+		categoryContainer.empty();
+
+		categories.forEach(function (category, index) {
+			const iconClass = getCategoryIcon(index);
+
+			const html = `
+				<div class="categories__item" data-id="${category.id}">
+					<div class="categories__item__icon">
+						<span class="${iconClass}"></span>
+						<h5>${category.name}</h5>
+					</div>
+				</div>
+			`;
+
+			categoryContainer.append(html);
+		});
+
+		// Re-init carousel
+		if (categoryContainer.hasClass("owl-carousel")) {
+			categoryContainer.trigger("destroy.owl.carousel");
+			categoryContainer.owlCarousel({
+				loop: true,
+				margin: 10,
+				items: 4,
+				autoplay: true,
+				autoplayTimeout: 3000,
+				nav: false,
+				dots: false,
+				responsive: {
+					0: { items: 2 },
+					600: { items: 3 },
+					1000: { items: 5 },
+				},
+			});
+		}
+
+		// 📌 Bắt sự kiện click
+		$(".categories__item").on("click", function () {
+			const categoryId = $(this).data("id");
+			loadProducts(categoryId);
+		});
+	}
+
+	function getCategoryIcon(index) {
+		const iconClasses = [
+			"flaticon-029-cupcake-3",
+			"flaticon-034-chocolate-roll",
+			"flaticon-005-pancake",
+			"flaticon-030-cupcake-2",
+			"flaticon-006-macarons",
+			"flaticon-007-pie",
+		];
+		return iconClasses[index % iconClasses.length];
+	}
+
+	function loadProducts(categoryId = null) {
 		getProducts(function (response) {
 			if (response.result && response.data && response.data.content) {
 				displayProducts(response.data.content);
 			} else {
 				console.error("Không tìm thấy dữ liệu sản phẩm trong phản hồi API.");
 			}
-		});
+		}, categoryId);
 	}
 
 	function displayProducts(products) {
@@ -34,7 +100,7 @@ $(document).ready(function () {
                   <div class="col-lg-3 col-md-6 col-sm-6">
                       <div class="product__item">
                           <div class="product__item__pic set-bg" 
-																data-setbg="https://res.cloudinary.com/dcxgx3ott/image/upload/v1744129296/product-10_q4cevx.jpg">
+																data-setbg=${product.image}>
                               <div class="product__label">
                                   <span>${product.category.name}</span>
                               </div>
@@ -61,6 +127,6 @@ $(document).ready(function () {
 			productContainer.html("<p>Không có sản phẩm nào để hiển thị.</p>");
 		}
 	}
-
+	loadCategories();
 	loadProducts();
 });

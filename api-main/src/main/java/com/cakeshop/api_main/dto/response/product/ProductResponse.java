@@ -40,14 +40,8 @@ public class ProductResponse {
     @Schema(description = "status")
     Integer status;
 
-    @Schema(description = "status")
-    List<String> images;
-
-    @Schema(description = "Total number of reviews")
-    Long totalReviews;
-
-    @Schema(description = "Average rating")
-    Double averageRating;
+    @Schema(description = "image")
+    String image;
 
     @Schema(description = "Total quantity sold")
     Long totalSold;

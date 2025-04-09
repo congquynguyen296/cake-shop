@@ -38,7 +38,6 @@ public interface ProductMapper {
     @Mapping(source = "tags", target = "tags", qualifiedByName = "fromEntitiesToTagResponseList")
     @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
     @Mapping(source = "status", target = "status")
-    @Mapping(source = "images", target = "images")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToProductResponse")
     ProductResponse fromEntityToProductResponse(Product product);
