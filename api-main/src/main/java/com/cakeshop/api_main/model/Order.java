@@ -58,12 +58,19 @@ public class Order extends Abstract {
         this.paymentMethod = paymentMethod;
     }
 
-    public void makeOrder(List<OrderItemDetails> orderItemDetailsList) {
+    public void makeOrder(List<OrderItemDetails> orderItemList) {
         initializeOrderStatus();
 
-        initializeOrderItems(orderItemDetailsList);
+        initializeOrderItems(orderItemList);
 
         calculateTotalAmount();
+    }
+
+    public void calculateTotalAmount() {
+        double itemsTotal = orderItems.stream()
+                .mapToDouble(OrderItem::getTotalPrice)
+                .sum();
+        this.totalAmount = itemsTotal + (shippingFee != null ? shippingFee : 0);
     }
 
     private void initializeOrderStatus() {
@@ -72,8 +79,8 @@ public class Order extends Abstract {
         this.orderStatuses.add(orderStatus);
     }
 
-    private void initializeOrderItems(List<OrderItemDetails> orderItemDetailsList) {
-        this.orderItems = orderItemDetailsList.stream()
+    private void initializeOrderItems(List<OrderItemDetails> orderItemList) {
+        this.orderItems = orderItemList.stream()
                 .map(entry -> {
                     Product product = entry.getProduct();
                     int quantity = entry.getQuantity();
@@ -90,10 +97,4 @@ public class Order extends Abstract {
                 .collect(Collectors.toList());
     }
 
-    public void calculateTotalAmount() {
-        double itemsTotal = orderItems.stream()
-                .mapToDouble(OrderItem::getTotalPrice)
-                .sum();
-        this.totalAmount = itemsTotal + (shippingFee != null ? shippingFee : 0);
-    }
 }
