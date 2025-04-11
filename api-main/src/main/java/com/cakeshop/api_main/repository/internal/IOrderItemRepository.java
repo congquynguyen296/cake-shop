@@ -26,4 +26,19 @@ public interface IOrderItemRepository extends JpaRepository<OrderItem, String>, 
             @Param("productIds") List<String> productIds,
             @Param("status") Integer status
     );
+
+    @Query("""
+            SELECT new com.cakeshop.api_main.dto.response.product.ProductSoldResponse(
+                oi.product.id,
+                SUM(oi.quantity)
+            )
+            FROM OrderItem oi
+            WHERE oi.order.currentStatus.status = :status
+            AND oi.product.id = :productId
+            GROUP BY oi.product.id
+            """)
+    ProductSoldResponse findSoldQuantityByProductId(
+            @Param("productId") String productId,
+            @Param("status") Integer status
+    );
 }
