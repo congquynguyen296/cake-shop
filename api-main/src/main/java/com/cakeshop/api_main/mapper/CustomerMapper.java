@@ -21,6 +21,14 @@ public interface CustomerMapper {
     @Named("fromEntityToCustomerResponse")
     CustomerResponse fromEntityToCustomerResponse(Customer customer);
 
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "account.email", target = "email")
+    @Mapping(source = "firstName", target = "firstName")
+    @Mapping(source = "lastName", target = "lastName")
+    @BeanMapping(ignoreByDefault = true)
+    @Named("fromEntityToCustomerResponseAutoComplete")
+    CustomerResponse fromEntityToCustomerResponseAutoComplete(Customer customer);
+
     @Mapping(source = "firstName", target = "firstName")
     @Mapping(source = "lastName", target = "lastName")
     @Mapping(source = "dob", target = "dob")

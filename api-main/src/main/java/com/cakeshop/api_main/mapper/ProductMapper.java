@@ -47,6 +47,7 @@ public interface ProductMapper {
     @Mapping(source = "price", target = "price")
     @Mapping(source = "quantity", target = "quantity")
     @Mapping(source = "category", target = "category", qualifiedByName = "fromEntityToCategoryResponseAutoComplete")
+    @Mapping(source = "tags", target = "tags", qualifiedByName = "fromEntityToTagResponse")
     @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToProductResponseDetails")
@@ -57,9 +58,17 @@ public interface ProductMapper {
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
+    @Mapping(source = "images", target = "image", qualifiedByName = "mapFirstImage")
     @Mapping(source = "price", target = "price")
+    @Mapping(source = "category", target = "category", qualifiedByName = "fromEntityToCategoryResponseAutoComplete")
+    @Mapping(source = "tags", target = "tags", qualifiedByName = "fromEntityToTagResponse")
     @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToProductResponseAutoComplete")
     ProductResponse fromEntityToProductResponseAutoComplete(Product product);
+
+    @Named("mapFirstImage")
+    default String mapFirstImage(List<String> images) {
+        return (images != null && !images.isEmpty()) ? images.getFirst() : null;
+    }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        uses = {NationMapper.class})
+        uses = {NationMapper.class, CustomerMapper.class})
 public interface AddressMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "province", target = "province", qualifiedByName = "fromEntityToNationResponseAutoComplete")
@@ -16,6 +16,7 @@ public interface AddressMapper {
     @Mapping(source = "commune", target = "commune", qualifiedByName = "fromEntityToNationResponseAutoComplete")
     @Mapping(source = "details", target = "details")
     @Mapping(source = "isDefault", target = "isDefault")
+    @Mapping(source = "customer", target = "customer", qualifiedByName = "fromEntityToCustomerResponseAutoComplete")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToAddressResponse")
     AddressResponse fromEntityToAddressResponse(Address address);

@@ -1,4 +1,5 @@
 import { getCategories, getProducts } from "./api.js";
+import { addToCart } from "./cart.js";
 
 $(document).ready(function () {
 	function loadCategories() {
@@ -137,7 +138,7 @@ $(document).ready(function () {
 				}
 				const productHtml = `
                   <div class="col-lg-3 col-md-6 col-sm-6">
-                      <div class="product__item">
+                      <div class="product__item" data-id="${product.id}">
                           <div class="product__item__pic set-bg" 
 																data-setbg=${product.image}>
                               <div class="product__label">
@@ -149,8 +150,8 @@ $(document).ready(function () {
                               <h6><a href="#">${product.name}</a></h6>
                               <div class="product__item__price">${formattedPrice}</div>
                               <div class="cart_add">
-                                  <a href="#">Add to cart</a>
-                              </div>
+																<a href="#" class="add-to-cart-btn" data-id="${product.id}">Add to cart</a>
+															</div>
                           </div>
                       </div>
                   </div>
@@ -161,6 +162,11 @@ $(document).ready(function () {
 			$(".set-bg").each(function () {
 				const bg = $(this).data("setbg");
 				$(this).css("background-image", `url(${bg})`);
+			});
+			$(".add-to-cart-btn").on("click", function (e) {
+				e.preventDefault();
+				const productId = $(this).data("id");
+				addToCart(productId, 1);
 			});
 		} else {
 			productContainer.html("<p>Không có sản phẩm nào để hiển thị.</p>");

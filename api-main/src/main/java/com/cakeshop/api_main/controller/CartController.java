@@ -8,8 +8,10 @@ import com.cakeshop.api_main.exception.ErrorCode;
 import com.cakeshop.api_main.exception.NotFoundException;
 import com.cakeshop.api_main.mapper.CartMapper;
 import com.cakeshop.api_main.model.Cart;
+import com.cakeshop.api_main.model.CartItem;
 import com.cakeshop.api_main.model.Customer;
 import com.cakeshop.api_main.model.Product;
+import com.cakeshop.api_main.repository.internal.ICartItemRepository;
 import com.cakeshop.api_main.repository.internal.ICartRepository;
 import com.cakeshop.api_main.repository.internal.ICustomerRepository;
 import com.cakeshop.api_main.repository.internal.IProductRepository;
@@ -24,10 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -100,5 +99,29 @@ public class CartController {
         cart.addItems(productQuantityMap);
         cartRepository.save(cart);
         return BaseResponseUtils.success(null, "Added items to cart successfully");
+    }
+
+    @PostMapping(value = "/add-item", produces = MediaType.APPLICATION_JSON_VALUE)
+    public BaseResponse<Void> addToCart(
+            @Valid @RequestBody CreateCartItemRequest request
+    ) {
+        String username = SecurityUtil.getCurrentUsername();
+        Cart cart = cartRepository.findByCustomerAccountUsername(username).orElse(null);
+        if (cart == null) {
+            Customer customer = customerRepository.findByAccountUsername(username)
+                    .orElseThrow(() -> new NotFoundException("CUSTOMER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+            cart = Cart.builder()
+                    .customer(customer)
+                    .cartItems(new ArrayList<>())
+                    .build();
+        }
+        Product product = productRepository.findById(request.getProductId())
+                .orElseThrow(() -> new NotFoundException("PRODUCT_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+        if (product.getDiscount() != null && !product.getDiscount().isActive()) {
+            productRepository.updateDiscount(null);
+        }
+        cart.addItem(product, request.getQuantity());
+        cartRepository.save(cart);
+        return BaseResponseUtils.success(null, "Added item to cart successfully");
     }
 }
