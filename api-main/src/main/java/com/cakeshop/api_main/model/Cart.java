@@ -26,7 +26,8 @@ public class Cart extends Abstract {
     @JoinColumn(name = "customer_id")
     Customer customer;
 
-    @OneToMany(mappedBy = "cart")
+    @OrderBy("createdAt DESC")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     List<CartItem> cartItems = new ArrayList<>();
 
     public void addItems(Map<Product, Integer> productQuantityMap) {

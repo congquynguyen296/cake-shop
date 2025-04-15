@@ -106,6 +106,7 @@ public class AddressController {
                 .commune(commune)
                 .details(request.getDetails())
                 .isDefault(request.getIsDefault())
+                .customer(customer)
                 .build();
 
         if (address.getIsDefault()) {

@@ -1,5 +1,6 @@
 package com.cakeshop.api_main.dto.response.address;
 
+import com.cakeshop.api_main.dto.response.customer.CustomerResponse;
 import com.cakeshop.api_main.dto.response.nation.NationResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
@@ -26,4 +27,7 @@ public class AddressResponse {
 
     @Schema(description = "isDefault")
     String isDefault;
+
+    @Schema(description = "customer")
+    CustomerResponse customer;
 }

@@ -6,7 +6,7 @@
 		<meta name="keywords" content="Cake, unica, creative, html" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>Hồ sơ | Cake Shop</title>
+		<title>Địa chỉ | Cake Shop</title>
 
 		<!-- Google Font -->
 		<link
@@ -58,20 +58,6 @@
 			<div id="mobile-menu-wrap"></div>
 			<div class="offcanvas__option">
 				<ul>
-					<li>
-						USD <span class="arrow_carrot-down"></span>
-						<ul>
-							<li>EUR</li>
-							<li>USD</li>
-						</ul>
-					</li>
-					<li>
-						ENG <span class="arrow_carrot-down"></span>
-						<ul>
-							<li>Spanish</li>
-							<li>ENG</li>
-						</ul>
-					</li>
 					<li>
 						<a href="#" class="user-email">example@example.com</a>
 						<span class="arrow_carrot-down"></span>
@@ -130,9 +116,11 @@
 						<nav class="header__menu mobile-menu">
 							<ul>
 								<li><a href="./index.html">Home</a></li>
-								<li class="active"><a href="./profile.html">Hồ sơ cá nhân</a></li>
+								<li><a href="./profile.html">Hồ sơ cá nhân</a></li>
 								<li><a href="./address.html">Địa chỉ của tôi</a></li>
-								<li><a href="./order.html">Đơn hàng của tôi</a></li>
+								<li class="active">
+									<a href="./order.html">Đơn hàng của tôi</a>
+								</li>
 							</ul>
 						</nav>
 					</div>
@@ -141,103 +129,22 @@
 		</header>
 		<!-- Header Section End -->
 
-		<!-- Profile Section Begin -->
-		<section class="profile spad">
+		<!-- Order List Section Begin -->
+		<section class="order spad">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-12 text-center">
-						<div class="section-title">
-							<span>Hồ sơ cá nhân</span>
-							<h3>Chỉnh sửa thông tin</h3>
+					<div class="col-lg-12">
+						<div
+							class="order__title d-flex justify-content-between align-items-center mb-4"
+						>
+							<h2>Đơn hàng của tôi</h2>
 						</div>
-					</div>
-				</div>
-				<div class="row justify-content-center">
-					<div class="col-lg-10 col-md-12">
-						<div class="profile row">
-							<!-- Cột cho ảnh -->
-							<div class="col-lg-4 col-md-4 profile__image-wrapper">
-								<div class="profile__image">
-									<img
-										id="avatar"
-										src="https://res.cloudinary.com/dcxgx3ott/image/upload/v1744349601/Avatar_UTE_hddqyo.png"
-										alt="Avatar"
-									/>
-								</div>
-							</div>
-							<!-- Cột cho form thông tin -->
-							<div class="col-lg-8 col-md-8 profile__form-wrapper">
-								<form action="#" class="profile__form">
-									<div class="form-group">
-										<label for="username">Tên đăng nhập</label>
-										<input
-											type="text"
-											class="form-control"
-											id="username"
-											disabled="true"
-										/>
-									</div>
-									<div class="form-group">
-										<label for="lastName">Họ</label>
-										<input
-											type="text"
-											class="form-control"
-											id="lastName"
-											placeholder="Nhập họ"
-										/>
-									</div>
-									<div class="form-group">
-										<label for="firstName">Tên</label>
-										<input
-											type="text"
-											class="form-control"
-											id="firstName"
-											placeholder="Nhập tên"
-										/>
-									</div>
-									<div class="form-group">
-										<label for="email">Email</label>
-										<input
-											type="email"
-											class="form-control"
-											id="email"
-											value="example@example.com"
-											placeholder="Nhập email"
-											readonly
-										/>
-									</div>
-									<div class="form-group">
-										<label for="phone">Số điện thoại</label>
-										<input
-											type="text"
-											class="form-control"
-											id="phone"
-											value="0123456789"
-											placeholder="Nhập số điện thoại"
-										/>
-									</div>
-									<div class="form-group">
-										<label for="dob">Ngày sinh</label>
-										<input
-											type="date"
-											class="form-control"
-											id="dob"
-											value="2004-02-08"
-										/>
-									</div>
-									<div class="form-group text-center">
-										<button type="submit" class="btn btn-primary">
-											Lưu thay đổi
-										</button>
-									</div>
-								</form>
-							</div>
-						</div>
+						<div class="order__list"></div>
 					</div>
 				</div>
 			</div>
 		</section>
-		<!-- Profile Section End -->
+		<!-- Order List Section End -->
 
 		<!-- Map Begin -->
 		<div class="map">
@@ -345,6 +252,7 @@
 		<!-- Js Plugins -->
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/jquery.nice-select.min.js"></script>
 		<script src="js/jquery.barfiller.js"></script>
 		<script src="js/jquery.magnific-popup.min.js"></script>
@@ -352,7 +260,7 @@
 		<script src="js/owl.carousel.min.js"></script>
 		<script src="js/jquery.nicescroll.min.js"></script>
 		<script src="js/main.js"></script>
-		<script src="js/header.js" type="module"></script>
-		<script src="js/profile.js" type="module"></script>
+		<script src="js/api.js" type="module"></script>
+		<script src="js/order.js" type="module"></script>
 	</body>
 </html>

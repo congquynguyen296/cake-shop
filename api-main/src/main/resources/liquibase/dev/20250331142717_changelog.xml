@@ -140,4 +140,12 @@
     <changeSet author="Authentication" id="1743433424773-8">
         <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="tbl_review" constraintName="FKa8d24imtac9cwo0pjcc9s7qsy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_customer" validate="true"/>
     </changeSet>
+    <changeSet author="Authentication" id="1744683745231-6">
+        <addColumn tableName="tbl_order">
+            <column name="address_id" type="varchar(255)" afterColumn="total_amount"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Authentication" id="1744683745231-7">
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="tbl_order" constraintName="FK8k37nxavla6c4oxptbde99x0r" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_address" validate="true"/>
+    </changeSet>
 </databaseChangeLog>

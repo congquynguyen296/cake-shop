@@ -33,6 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class OrderController {
             orderItemDetailsList.add(new OrderItemDetails(product, item.getQuantity(), item.getNote()));
         }
 
-        Order order = new Order(customer, request.getShippingFee(), request.getPaymentMethod());
+        Order order = new Order(customer, request.getShippingFee());
         order.makeOrder(orderItemDetailsList);
         orderRepository.save(order);
 
@@ -144,6 +145,16 @@ public class OrderController {
         } else {
             throw new BadRequestException("Unexpected error: Order not in fetched list", ErrorCode.INVALID_FORM_ERROR);
         }
+        orderRepository.save(order);
+        return BaseResponseUtils.success(null, "Update order status successfully");
+    }
+
+    @PutMapping(value = "/cancel/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public BaseResponse<Void> cancelOrder(
+            @PathVariable String orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new NotFoundException("ORDER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+        order.cancel();
         orderRepository.save(order);
         return BaseResponseUtils.success(null, "Update order status successfully");
     }
