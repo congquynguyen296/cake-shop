@@ -59,6 +59,7 @@ public class Order extends Abstract {
     }
 
     public void makeOrder(List<OrderItemDetails> orderItemDetailsList) {
+
         initializeOrderStatus();
 
         initializeOrderItems(orderItemDetailsList);
