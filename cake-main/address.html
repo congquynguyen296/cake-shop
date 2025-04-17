@@ -80,15 +80,10 @@
 						<div class="col-lg-12">
 							<div class="header__top__inner">
 								<div class="header__top__left">
-									<ul>
-										<li>
-											<a href="#" class="user-email">example@example.com</a>
+									<ul id="user-menu">
+										<li id="user-section">
+											<a href="login.html">Sign in</a>
 											<span class="arrow_carrot-down"></span>
-											<ul class="user-dropdown">
-												<li><a href="profile.html">Tài khoản của tôi</a></li>
-												<li><a href="orders.html">Đơn mua</a></li>
-												<li><a href="login.html">Đăng xuất</a></li>
-											</ul>
 										</li>
 									</ul>
 								</div>
@@ -120,19 +115,10 @@
 					<div class="col-lg-12">
 						<nav class="header__menu mobile-menu">
 							<ul>
-								<li><a href="./profile.html">Hồ sơ</a></li>
-								<li class="active"><a href="./address.html">Địa chỉ</a></li>
-								<li>
-									<a href="#">Pages</a>
-									<ul class="dropdown">
-										<li><a href="./shop-details.html">Shop Details</a></li>
-										<li><a href="./shoping-cart.html">Shopping Cart</a></li>
-										<li><a href="./checkout.html">Check Out</a></li>
-										<li><a href="./wisslist.html">Wishlist</a></li>
-										<li><a href="./Class.html">Class</a></li>
-										<li><a href="./blog-details.html">Blog Details</a></li>
-									</ul>
-								</li>
+								<li><a href="./index.html">Home</a></li>
+								<li><a href="./profile.html">Hồ sơ cá nhân</a></li>
+								<li class="active"><a href="./address.html">Địa chỉ của tôi</a></li>
+								<li><a href="./order.html">Đơn hàng của tôi</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -161,14 +147,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row address-list">
 					<div class="col-lg-12">
 						<div class="address-item mb-4 d-flex justify-content-between">
 							<div class="address-item__info">
 								<h4 class="address-item__title">
 									<span class="address-item__name">Phạm Khánh Huy</span>
 									<span class="address-item__separator"> | </span>
-									<span class="address-item__phone">(+84) 989 063 939</span>
+									<span class="address-item__email">(+84) 989 063 939</span>
 								</h4>
 								<p class="address-item__location">
 									Phường Phước Bình, Thị Xã Phước Long, Bình Phước
@@ -277,7 +263,6 @@
 									class="form-control"
 									id="calc_shipping_provinces"
 									name="calc_shipping_provinces"
-									required
 								>
 									<option value="">Tỉnh / Thành phố</option>
 								</select>
@@ -296,7 +281,6 @@
 									id="calc_shipping_district"
 									name="calc_shipping_district"
 									disabled
-									required
 								>
 									<option value="">Quận / Huyện</option>
 								</select>
@@ -315,7 +299,6 @@
 									id="calc_shipping_commune"
 									name="calc_shipping_commune"
 									disabled
-									required
 								>
 									<option value="">Phường / Xã</option>
 								</select>
@@ -448,7 +431,6 @@
 					<div class="row">
 						<div class="col-lg-7">
 							<p class="copyright__text text-white">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy;
 								<script>
 									document.write(new Date().getFullYear());
@@ -456,7 +438,6 @@
 								All rights reserved | This template is made with
 								<i class="fa fa-heart" aria-hidden="true"></i> by
 								<a href="https://colorlib.com" target="_blank">Colorlib</a>
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</p>
 						</div>
 						<div class="col-lg-5">
@@ -485,7 +466,7 @@
 		<script src="js/owl.carousel.min.js"></script>
 		<script src="js/jquery.nicescroll.min.js"></script>
 		<script src="js/main.js"></script>
-		<script src="js/api.js"></script>
-		<script src="js/address.js"></script>
+		<script src="js/header.js" type="module"></script>
+		<script src="js/address.js" type="module"></script>
 	</body>
 </html>

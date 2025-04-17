@@ -61,4 +61,10 @@ public class Product extends Abstract {
     public boolean checkQuantity(int quantity) {
         return this.quantity >= quantity;
     }
+
+    public Integer getDiscountPercentage() {
+        return (discount != null && discount.getDiscountPercentage() != null)
+                ? discount.getDiscountPercentage()
+                : 0;
+    }
 }

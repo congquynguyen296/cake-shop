@@ -35,22 +35,40 @@ public interface ProductMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "quantity", target = "quantity")
     @Mapping(source = "category", target = "category", qualifiedByName = "fromEntityToCategoryResponseAutoComplete")
-    @Mapping(source = "tags", target = "tags", qualifiedByName = "fromEntitiesToTagResponseList")
+    @Mapping(source = "tags", target = "tags", qualifiedByName = "fromEntityToTagResponse")
     @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
-    @Mapping(source = "status", target = "status")
     @Mapping(source = "images", target = "images")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToProductResponse")
     ProductResponse fromEntityToProductResponse(Product product);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "price", target = "price")
+    @Mapping(source = "quantity", target = "quantity")
+    @Mapping(source = "category", target = "category", qualifiedByName = "fromEntityToCategoryResponseAutoComplete")
+    @Mapping(source = "tags", target = "tags", qualifiedByName = "fromEntityToTagResponse")
+    @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
+    @BeanMapping(ignoreByDefault = true)
+    @Named("fromEntityToProductResponseDetails")
+    ProductResponse fromEntityToProductResponseDetails(Product product);
 
     @IterableMapping(elementTargetType = ProductResponse.class, qualifiedByName = "fromEntityToProductResponse")
     List<ProductResponse> fromEntitiesToProductResponseList(List<Product> products);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
+    @Mapping(source = "images", target = "image", qualifiedByName = "mapFirstImage")
     @Mapping(source = "price", target = "price")
+    @Mapping(source = "category", target = "category", qualifiedByName = "fromEntityToCategoryResponseAutoComplete")
+    @Mapping(source = "tags", target = "tags", qualifiedByName = "fromEntityToTagResponse")
     @Mapping(source = "discount", target = "discount", qualifiedByName = "fromEntityToDiscountResponse")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToProductResponseAutoComplete")
     ProductResponse fromEntityToProductResponseAutoComplete(Product product);
+
+    @Named("mapFirstImage")
+    default String mapFirstImage(List<String> images) {
+        return (images != null && !images.isEmpty()) ? images.getFirst() : null;
+    }
 }
