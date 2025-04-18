@@ -14,14 +14,12 @@ import com.cakeshop.api_main.exception.ErrorCode;
 import com.cakeshop.api_main.exception.NotFoundException;
 import com.cakeshop.api_main.mapper.OrderMapper;
 import com.cakeshop.api_main.mapper.OrderStatusMapper;
-import com.cakeshop.api_main.model.Customer;
-import com.cakeshop.api_main.model.Order;
-import com.cakeshop.api_main.model.OrderStatus;
-import com.cakeshop.api_main.model.Product;
+import com.cakeshop.api_main.model.*;
 import com.cakeshop.api_main.model.criteria.OrderCriteria;
 import com.cakeshop.api_main.repository.internal.ICustomerRepository;
 import com.cakeshop.api_main.repository.internal.IOrderRepository;
 import com.cakeshop.api_main.repository.internal.IProductRepository;
+import com.cakeshop.api_main.repository.internal.ITagRepository;
 import com.cakeshop.api_main.utils.BaseResponseUtils;
 import com.cakeshop.api_main.utils.SecurityUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -33,7 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -51,6 +48,7 @@ public class OrderController {
     ICustomerRepository customerRepository;
     IProductRepository productRepository;
     IOrderRepository orderRepository;
+    ITagRepository tagRepository;
 
     OrderMapper orderMapper;
     private final OrderStatusMapper orderStatusMapper;
@@ -59,7 +57,7 @@ public class OrderController {
     public BaseResponse<OrderResponse> get(@PathVariable String id) {
         String username = SecurityUtil.getCurrentUsername();
         Order order = orderRepository.findByIdAndCustomerAccountUsername(id, username)
-                .orElseThrow(() -> new NotFoundException("ORDER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.ORDER_NOT_FOUND_ERROR));
 
         return BaseResponseUtils.success(orderMapper.fromEntityToOrderResponse(order), "Get cart successfully");
     }
@@ -71,7 +69,7 @@ public class OrderController {
     ) {
         String username = SecurityUtil.getCurrentUsername();
         Customer customer = customerRepository.findByAccountUsername(username)
-                .orElseThrow(() -> new NotFoundException("CUSTOMER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR));
         criteria.setCustomerId(customer.getId());
         Page<Order> pageData = orderRepository.findAll(criteria.getSpecification(), pageable);
         PaginationResponse<OrderResponse> responseDto = new PaginationResponse<>(
@@ -86,7 +84,7 @@ public class OrderController {
     public BaseResponse<List<OrderStatusResponse>> listOrderStatus(@PathVariable String id) {
         String username = SecurityUtil.getCurrentUsername();
         Order order = orderRepository.findByIdAndCustomerAccountUsername(id, username)
-                .orElseThrow(() -> new NotFoundException("ORDER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.ORDER_NOT_FOUND_ERROR));
         List<OrderStatus> orderStatuses = order.getOrderStatuses();
         return BaseResponseUtils.success(orderStatusMapper.fromEntitiesToOrderStatusResponseList(orderStatuses), "Get order status list successfully");
     }
@@ -95,7 +93,7 @@ public class OrderController {
     public BaseResponse<Void> create(@Valid @RequestBody CreateOrderRequest request) {
         String username = SecurityUtil.getCurrentUsername();
         Customer customer = customerRepository.findByAccountUsername(username)
-                .orElseThrow(() -> new NotFoundException("CUSTOMER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR));
 
         List<String> productIds = request.getOrderItems().stream()
                 .map(CreateOrderItemRequest::getProductId)
@@ -109,19 +107,40 @@ public class OrderController {
                     .filter(id -> !foundIds.contains(id))
                     .toList();
             if (!missingIds.isEmpty()) {
-                throw new NotFoundException("Products not found: " + missingIds, ErrorCode.RESOURCE_NOT_EXISTED);
+                throw new NotFoundException("Products not found: " + missingIds, ErrorCode.PRODUCT_NOT_FOUND_ERROR);
             }
         }
+
+        List<String> tagIds = request.getOrderItems().stream()
+                .map(CreateOrderItemRequest::getTagId)
+                .collect(Collectors.toList());
+        List<Tag> tags = tagRepository.findAllById(tagIds);
+        if (tags.size() != tagIds.size()) {
+            List<String> foundIds = tags.stream()
+                    .map(Tag::getId)
+                    .toList();
+            List<String> missingIds = tagIds.stream()
+                    .filter(id -> !foundIds.contains(id))
+                    .toList();
+            if (!missingIds.isEmpty()) {
+                throw new NotFoundException("Tags not found: " + missingIds, ErrorCode.TAG_NOT_FOUND_ERROR);
+            }
+        }
+
         List<OrderItemDetails> orderItemDetailsList = new ArrayList<>();
         for (CreateOrderItemRequest item : request.getOrderItems()) {
             Product product = products.stream()
                     .filter(p -> p.getId().equals(item.getProductId()))
                     .findFirst()
-                    .orElseThrow(() -> new BadRequestException("Unexpected error: Product not in fetched list", ErrorCode.INVALID_FORM_ERROR));
+                    .orElseThrow(() -> new NotFoundException(ErrorCode.PRODUCT_NOT_FOUND_ERROR));
             if (product.getDiscount() != null && !product.getDiscount().isActive()) {
                 productRepository.updateDiscount(null);
             }
-            orderItemDetailsList.add(new OrderItemDetails(product, item.getQuantity(), item.getNote()));
+            Tag tag = tags.stream()
+                    .filter(t -> t.getId().equals(item.getTagId()))
+                    .findFirst()
+                    .orElseThrow(() -> new NotFoundException(ErrorCode.TAG_NOT_FOUND_ERROR));
+            orderItemDetailsList.add(new OrderItemDetails(product, tag, item.getQuantity()));
         }
 
         Order order = new Order(customer, request.getShippingFee());
@@ -137,13 +156,13 @@ public class OrderController {
     ) {
         String username = SecurityUtil.getCurrentUsername();
         Order order = orderRepository.findByIdAndCustomerAccountUsername(request.getId(), username)
-                .orElseThrow(() -> new NotFoundException("ORDER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.ORDER_NOT_FOUND_ERROR));
         if (order.getCurrentStatus().getStatus().equals(request.getStatus() - 1) || request.getStatus().equals(BaseConstant.ORDER_STATUS_CANCELED)) {
             OrderStatus orderStatus = new OrderStatus(request.getStatus(), new Date(), order);
             order.setCurrentStatus(orderStatus);
             order.getOrderStatuses().add(orderStatus);
         } else {
-            throw new BadRequestException("Unexpected error: Order not in fetched list", ErrorCode.INVALID_FORM_ERROR);
+            throw new BadRequestException(ErrorCode.ORDER_STATUS_INVALID_ERROR);
         }
         orderRepository.save(order);
         return BaseResponseUtils.success(null, "Update order status successfully");
@@ -153,9 +172,9 @@ public class OrderController {
     public BaseResponse<Void> cancelOrder(
             @PathVariable String orderId) {
         Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new NotFoundException("ORDER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.ORDER_NOT_FOUND_ERROR));
         order.cancel();
         orderRepository.save(order);
-        return BaseResponseUtils.success(null, "Update order status successfully");
+        return BaseResponseUtils.success(null, "Cancel order successfully");
     }
 }

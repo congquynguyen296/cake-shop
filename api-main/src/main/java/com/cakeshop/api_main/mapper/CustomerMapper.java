@@ -15,23 +15,19 @@ public interface CustomerMapper {
     @Mapping(source = "account.avatarPath", target = "avatarPath")
     @Mapping(source = "firstName", target = "firstName")
     @Mapping(source = "lastName", target = "lastName")
+    @Mapping(source = "fullName", target = "fullName")
     @Mapping(source = "dob", target = "dob")
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
     @Mapping(source = "loyalty", target = "loyalty")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToCustomerResponse")
     CustomerResponse fromEntityToCustomerResponse(Customer customer);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "account.email", target = "email")
     @Mapping(source = "firstName", target = "firstName")
     @Mapping(source = "lastName", target = "lastName")
-    @BeanMapping(ignoreByDefault = true)
-    @Named("fromEntityToCustomerResponseAutoComplete")
-    CustomerResponse fromEntityToCustomerResponseAutoComplete(Customer customer);
-
-    @Mapping(source = "firstName", target = "firstName")
-    @Mapping(source = "lastName", target = "lastName")
+    @Mapping(source = "fullName", target = "fullName")
     @Mapping(source = "dob", target = "dob")
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
     @BeanMapping(ignoreByDefault = true)
     @Named("updateFromUpdateProductRequest")
     void updateFromUpdateCustomerRequest(@MappingTarget Customer customer, UpdateCustomerRequest request);

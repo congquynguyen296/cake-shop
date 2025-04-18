@@ -1,13 +1,11 @@
 package com.cakeshop.api_main.dto.response.customer;
 
-import com.cakeshop.api_main.dto.response.address.AddressResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
-import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
@@ -24,10 +22,12 @@ public class CustomerResponse {
     String firstName;
     @Schema(description = "lastName")
     String lastName;
+    @Schema(description = "fullName")
+    String fullName;
     @Schema(description = "dob")
     Date dob;
+    @Schema(description = "phoneNumber")
+    String phoneNumber;
     @Schema(description = "loyalty")
     Long loyalty;
-    @Schema(description = "addresses")
-    List<AddressResponse> addresses;
 }

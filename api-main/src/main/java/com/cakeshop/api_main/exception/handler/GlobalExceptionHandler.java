@@ -87,7 +87,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<BaseResponse<?>> handleAccessDeniedException(AccessDeniedException ex) {
         ErrorCode errorCode = ErrorCode.FORBIDDEN;
-        return ResponseEntity.status(errorCode.getHttpStatusCode())
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(BaseResponse.builder()
                         .code(errorCode.getCode())
                         .message(errorCode.getMessage())

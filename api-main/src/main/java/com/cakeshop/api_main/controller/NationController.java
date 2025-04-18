@@ -58,7 +58,7 @@ public class NationController {
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<NationResponse> get(@PathVariable String id) {
         Nation nation = nationRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NATION_NOT_FOUND_ERROR));
 
         return BaseResponseUtils.success(nationMapper.fromEntityToNationResponse(nation), "Get nation successfully");
     }
@@ -67,7 +67,7 @@ public class NationController {
     @PreAuthorize("hasAuthority('NAT_CRE')")
     public BaseResponse<Void> create(@Valid @RequestBody CreateNationRequest request) {
         if (nationRepository.existsByName(request.getName())) {
-            throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+            throw new BadRequestException(ErrorCode.NATION_NAME_EXISTED_ERROR);
         }
         // Create Nation
         Nation nation = nationMapper.fromCreateNationRequest(request);
@@ -86,23 +86,23 @@ public class NationController {
     @PreAuthorize("hasAuthority('NAT_UDP')")
     public BaseResponse<Void> updateUser(@Valid @RequestBody UpdateNationRequest request) {
         Nation nation = nationRepository.findById(request.getId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NATION_NOT_FOUND_ERROR));
         // Update name
         if (!nation.getName().equals(request.getName())) {
             if (nationRepository.existsByName(request.getName())) {
-                throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+                throw new BadRequestException(ErrorCode.NATION_NAME_EXISTED_ERROR);
             }
         }
         if (!Objects.equals(nation.getKind(), request.getKind())) {
             if (nationRepository.existsByParent(nation)) {
-                throw new BadRequestException("NATION_ERROR_CANT_UPDATE_RELATIONSHIP_WITH_ADDRESS", ErrorCode.INVALID_FORM_ERROR);
+                throw new BadRequestException(ErrorCode.NATION_CANT_UPDATE_RELATIONSHIP_WITH_ADDRESS_ERROR);
             }
         }
         nationMapper.updateFromUpdateNationRequest(nation, request);
         if (request.getParentId() != null) {
             // check nation parent valid
             Nation parent = nationRepository.findById(request.getParentId())
-                    .orElseThrow(() -> new NotFoundException("NATION_PARENT_ERROR_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                    .orElseThrow(() -> new NotFoundException(ErrorCode.NATION_PARENT_NOT_FOUND_ERROR));
             validateNationParent(parent, nation);
             nation.setParent(parent);
         }
@@ -115,9 +115,9 @@ public class NationController {
     @PreAuthorize("hasAuthority('CAT_DEL')")
     public BaseResponse<Void> delete(@PathVariable String id) {
         Nation nation = nationRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("NATION_ERROR_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NATION_NOT_FOUND_ERROR));
         if (nationRepository.existsByParent(nation)) {
-            throw new BadRequestException("NATION_ERROR_CANT_DELETE_RELATIONSHIP_WITH_ADDRESS", ErrorCode.INVALID_FORM_ERROR);
+            throw new BadRequestException(ErrorCode.NATION_CANT_DELETE_RELATIONSHIP_WITH_ADDRESS_ERROR);
         }
         // Delete NATION
         nationRepository.deleteById(id);
@@ -128,15 +128,15 @@ public class NationController {
         boolean isProvince = Objects.equals(nation.getKind(), BaseConstant.NATION_KIND_PROVINCE);
         // If the nation is a District, it must not have a parent
         if (isProvince && parent != null) {
-            throw new BadRequestException("NATION_ERROR_PROVINCE_CANNOT_HAVE_PARENT", ErrorCode.INVALID_FORM_ERROR);
+            throw new BadRequestException(ErrorCode.NATION_PROVINCE_NOT_HAVE_PARENT_ERROR);
         }
         // If the nation is not a District, it must have a parent
         if (!isProvince && parent == null) {
-            throw new NotFoundException("NATION_PARENT_ERROR_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED);
+            throw new NotFoundException(ErrorCode.NATION_PARENT_INVALID_ERROR);
         }
         // Validate the parent's level: the parent must be exactly one level lower than the nation
         if (parent != null && parent.getKind() != nation.getKind() - 1) {
-            throw new BadRequestException("NATION_ERROR_PARENT_INVALID", ErrorCode.INVALID_FORM_ERROR);
+            throw new BadRequestException(ErrorCode.NATION_PARENT_INVALID_ERROR);
         }
     }
 }

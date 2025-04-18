@@ -15,8 +15,6 @@ public class OrderItemResponse {
     ProductResponse product;
     @Schema(description = "quantity")
     Integer quantity;
-    @Schema(description = "note")
-    String note;
     @Schema(description = "price")
     Double price;
     @Schema(description = "discountPercentage")

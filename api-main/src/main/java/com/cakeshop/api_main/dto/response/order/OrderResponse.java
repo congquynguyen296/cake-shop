@@ -29,4 +29,6 @@ public class OrderResponse {
     Double totalDiscount;
     @Schema(description = "status")
     OrderStatusResponse status;
+    @Schema(description = "note")
+    String note;
 }
