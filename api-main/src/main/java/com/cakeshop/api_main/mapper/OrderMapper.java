@@ -18,6 +18,7 @@ public interface OrderMapper {
     @Mapping(source = "totalAmount", target = "totalAmount")
     @Mapping(source = "totalDiscount", target = "totalDiscount")
     @Mapping(source = "currentStatus", target = "status", qualifiedByName = "fromEntityToOrderStatusResponse")
+    @Mapping(source = "note", target = "note")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToOrderResponse")
     OrderResponse fromEntityToOrderResponse(Order order);

@@ -33,6 +33,12 @@ public class Address extends Abstract {
     @Column(name = "is_default")
     Boolean isDefault;
 
+    @Column(name = "full_name")
+    String fullName;
+
+    @Column(name = "phone_number")
+    String phoneNumber;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     Customer customer;

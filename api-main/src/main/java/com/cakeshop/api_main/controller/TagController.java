@@ -54,7 +54,7 @@ public class TagController {
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<TagResponse> get(@PathVariable String id) {
         Tag tag = tagRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.TAG_NOT_FOUND_ERROR));
 
         return BaseResponseUtils.success(tagMapper.fromEntityToTagResponse(tag), "Get tag successfully");
     }
@@ -63,7 +63,7 @@ public class TagController {
     @PreAuthorize("hasAuthority('TAG_CRE')")
     public BaseResponse<Void> create(@Valid @RequestBody CreateTagRequest request) {
         if (tagRepository.existsByName(request.getName())) {
-            throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+            throw new BadRequestException(ErrorCode.TAG_NAME_EXISTED_ERROR);
         }
         // Create TAG
         Tag tag = tagMapper.fromCreateTagRequest(request);
@@ -76,11 +76,11 @@ public class TagController {
     @PreAuthorize("hasAuthority('TAG_UDP')")
     public BaseResponse<Void> updateUser(@Valid @RequestBody UpdateTagRequest request) {
         Tag tag = tagRepository.findById(request.getId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.TAG_NOT_FOUND_ERROR));
         // Update name
         if (!tag.getName().equals(request.getName())) {
             if (tagRepository.existsByName(request.getName())) {
-                throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+                throw new BadRequestException(ErrorCode.TAG_NAME_EXISTED_ERROR);
             }
         }
         // Update TAG
@@ -94,7 +94,7 @@ public class TagController {
     @PreAuthorize("hasAuthority('TAG_DEL')")
     public BaseResponse<Void> delete(@PathVariable String id) {
         Tag tag = tagRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.TAG_NOT_FOUND_ERROR));
 
         // Delete PRODUCT_TAG
         tag.getProducts().clear();

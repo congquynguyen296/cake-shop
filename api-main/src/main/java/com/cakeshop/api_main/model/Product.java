@@ -24,7 +24,7 @@ public class Product extends Abstract {
     @Column(name = "price")
     Double price;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     String description;
 
     @Column(name = "quantity")

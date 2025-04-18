@@ -52,7 +52,7 @@ public class AddressController {
     public BaseResponse<PaginationResponse<AddressResponse>> list(Pageable pageable) {
         String username = SecurityUtil.getCurrentUsername();
         Customer customer = customerRepository.findByAccountUsername(username)
-                .orElseThrow(() -> new NotFoundException("CUSTOMER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR));
         AddressCriteria addressCriteria = new AddressCriteria();
         addressCriteria.setCustomerId(customer.getId());
         Page<Address> pageData = addressRepository.findAll(addressCriteria.getSpecification(), pageable);
@@ -68,7 +68,7 @@ public class AddressController {
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<AddressResponse> get(@PathVariable String id) {
         Address address = addressRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.ADDRESS_NOT_FOUND_ERROR));
 
         return BaseResponseUtils.success(addressMapper.fromEntityToAddressResponse(address), "Get address successfully");
     }
@@ -78,7 +78,7 @@ public class AddressController {
         // Get current customer
         String username = SecurityUtil.getCurrentUsername();
         Customer customer = customerRepository.findByAccountUsername(username)
-                .orElseThrow(() -> new NotFoundException("CUSTOMER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR));
 
         // Get all nation from form
         List<Nation> nations = nationRepository.findAllById(Arrays.asList(
@@ -94,10 +94,10 @@ public class AddressController {
         Nation commune = getNationOrFail(nationMap, request.getCommuneId());
 
         if (province == null || district == null || commune == null) {
-            throw new NotFoundException("NATION_ERROR_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED);
+            throw new NotFoundException(ErrorCode.NATION_NOT_FOUND_ERROR);
         }
         if (isInvalidParent(district, province) || isInvalidParent(commune, district)) {
-            throw new BadRequestException("NATION_ERROR_NOT_ALLOW_HAVE_PARENT", ErrorCode.INVALID_FORM_ERROR);
+            throw new BadRequestException(ErrorCode.NATION_PARENT_INVALID_ERROR);
         }
 
         Address address = Address.builder()
@@ -106,6 +106,8 @@ public class AddressController {
                 .commune(commune)
                 .details(request.getDetails())
                 .isDefault(request.getIsDefault())
+                .fullName(request.getFullName())
+                .phoneNumber(request.getPhoneNumber())
                 .customer(customer)
                 .build();
 
@@ -119,12 +121,12 @@ public class AddressController {
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<Void> updateUser(@Valid @RequestBody UpdateAddressRequest request) {
         Address address = addressRepository.findById(request.getId())
-                .orElseThrow(() -> new NotFoundException("ADDRESS_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.ADDRESS_NOT_FOUND_ERROR));
 
         // Get current customer
         String username = SecurityUtil.getCurrentUsername();
         Customer customer = customerRepository.findByAccountUsername(username)
-                .orElseThrow(() -> new NotFoundException("CUSTOMER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR));
 
         // Get all nation from form
         List<Nation> nations = nationRepository.findAllById(Arrays.asList(
@@ -140,16 +142,18 @@ public class AddressController {
         Nation commune = getNationOrFail(nationMap, request.getCommuneId());
 
         if (province == null || district == null || commune == null) {
-            throw new NotFoundException("NATION_ERROR_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED);
+            throw new NotFoundException(ErrorCode.NATION_NOT_FOUND_ERROR);
         }
         if (isInvalidParent(district, province) || isInvalidParent(commune, district)) {
-            throw new BadRequestException("NATION_ERROR_NOT_ALLOW_HAVE_PARENT", ErrorCode.INVALID_FORM_ERROR);
+            throw new BadRequestException(ErrorCode.NATION_PARENT_INVALID_ERROR);
         }
         address.setProvince(province);
         address.setDistrict(district);
         address.setCommune(commune);
         address.setDetails(request.getDetails());
         address.setIsDefault(request.getIsDefault());
+        address.setFullName(request.getFullName());
+        address.setPhoneNumber(request.getPhoneNumber());
 
         if (address.getIsDefault()) {
             addressRepository.resetDefaultAddressesByCustomerId(customer.getId());
@@ -163,10 +167,10 @@ public class AddressController {
         // Get current customer
         String username = SecurityUtil.getCurrentUsername();
         customerRepository.findByAccountUsername(username)
-                .orElseThrow(() -> new NotFoundException("CUSTOMER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR));
         addressRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("ADDRESS_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
-        // Delete NATION
+                .orElseThrow(() -> new NotFoundException(ErrorCode.ADDRESS_NOT_FOUND_ERROR));
+        // Delete ADDRESS
         addressRepository.deleteById(id);
         return BaseResponseUtils.success(null, "Delete address successfully");
     }
@@ -176,9 +180,9 @@ public class AddressController {
         // Get current customer
         String username = SecurityUtil.getCurrentUsername();
         Customer customer = customerRepository.findByAccountUsername(username)
-                .orElseThrow(() -> new NotFoundException("CUSTOMER_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR));
         Address address = addressRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("ADDRESS_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.ADDRESS_NOT_FOUND_ERROR));
         addressRepository.resetDefaultAddressesByCustomerId(customer.getId());
         addressRepository.save(address);
         return BaseResponseUtils.success(null, "Set default address successfully");

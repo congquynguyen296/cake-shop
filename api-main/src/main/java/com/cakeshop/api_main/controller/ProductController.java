@@ -86,7 +86,7 @@ public class ProductController {
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<ProductResponse> get(@PathVariable String id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.PRODUCT_NOT_FOUND_ERROR));
         if (!product.getDiscount().isActive()) {
             product.setDiscount(null);
         }
@@ -108,11 +108,11 @@ public class ProductController {
     @PreAuthorize("hasAuthority('PRO_CRE')")
     public BaseResponse<Void> create(@Valid @RequestBody CreateProductRequest request) {
         if (productRepository.existsByName(request.getName())) {
-            throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+            throw new BadRequestException(ErrorCode.PRODUCT_NAME_EXISTED_ERROR);
         }
         // Find CATEGORY
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CATEGORY_NOT_FOUND_ERROR));
         // Find TAG
         List<Tag> tags = tagRepository.findAllByIdIn(request.getTagIds());
 
@@ -131,17 +131,17 @@ public class ProductController {
     @PreAuthorize("hasAuthority('PRO_UDP')")
     public BaseResponse<Void> update(@Valid @RequestBody UpdateProductRequest request) {
         Product product = productRepository.findById(request.getId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.PRODUCT_NOT_FOUND_ERROR));
         // Update name
         if (!product.getName().equals(request.getName())) {
             if (tagRepository.existsByName(request.getName())) {
-                throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+                throw new BadRequestException(ErrorCode.PRODUCT_NAME_EXISTED_ERROR);
             }
         }
         // Update CATEGORY
         if (!product.getCategory().getId().equals(request.getCategoryId())) {
             Category category = categoryRepository.findById(request.getCategoryId())
-                    .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                    .orElseThrow(() -> new NotFoundException(ErrorCode.CATEGORY_NOT_FOUND_ERROR));
             product.setCategory(category);
         }
         if (!product.getTags().isEmpty()) {
@@ -158,7 +158,7 @@ public class ProductController {
     @PreAuthorize("hasAuthority('PRO_DEL')")
     public BaseResponse<Void> delete(@PathVariable String id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.PRODUCT_NOT_FOUND_ERROR));
 
         // Delete PRODUCT_TAG
         product.getTags().clear();

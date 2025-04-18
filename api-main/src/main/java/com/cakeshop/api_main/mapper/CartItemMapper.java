@@ -8,10 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        uses = {ProductMapper.class})
+        uses = {ProductMapper.class, TagMapper.class})
 public interface CartItemMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "product", target = "product", qualifiedByName = "fromEntityToProductResponseAutoComplete")
+    @Mapping(source = "tag", target = "tag", qualifiedByName = "fromEntityToTagResponse")
     @Mapping(source = "quantity", target = "quantity")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToCartItemResponse")

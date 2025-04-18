@@ -13,7 +13,6 @@ public interface OrderItemMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "product", target = "product", qualifiedByName = "fromEntityToProductResponseAutoComplete")
     @Mapping(source = "quantity", target = "quantity")
-    @Mapping(source = "note", target = "note")
     @Mapping(source = "unitPrice", target = "price")
     @Mapping(source = "unitDiscountPercentage", target = "discountPercentage")
     @Mapping(source = "totalPrice", target = "totalPrice")

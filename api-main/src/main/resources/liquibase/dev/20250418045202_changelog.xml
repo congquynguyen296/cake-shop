@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Authentication" id="1744951938765-6">
+        <addColumn tableName="tbl_cart_item">
+            <column name="tag_id" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Authentication" id="1744951938765-7">
+        <addColumn tableName="tbl_order_item">
+            <column name="tag_id" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Authentication" id="1744951938765-8">
+        <addForeignKeyConstraint baseColumnNames="tag_id" baseTableName="tbl_order_item" constraintName="FKam0oemtnd3l5wxmn8ts8slrhl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_tag" validate="true"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1744951938765-9">
+        <addForeignKeyConstraint baseColumnNames="tag_id" baseTableName="tbl_cart_item" constraintName="FKbnsmmwp713u54ku7scc89egsu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tbl_tag" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

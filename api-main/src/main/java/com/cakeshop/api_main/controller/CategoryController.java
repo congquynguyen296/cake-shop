@@ -57,7 +57,7 @@ public class CategoryController {
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<CategoryResponse> get(@PathVariable String id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CATEGORY_NOT_FOUND_ERROR));
 
         return BaseResponseUtils.success(categoryMapper.fromEntityToCategoryResponse(category), "Get category successfully");
     }
@@ -66,7 +66,7 @@ public class CategoryController {
     @PreAuthorize("hasAuthority('CAT_CRE')")
     public BaseResponse<Void> create(@Valid @RequestBody CreateCategoryRequest request) {
         if (categoryRepository.existsByName(request.getName())) {
-            throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+            throw new BadRequestException(ErrorCode.CATEGORY_NAME_EXISTED_ERROR);
         }
         // Create CATEGORY
         Category category = categoryMapper.fromCreateCategoryRequest(request);
@@ -79,11 +79,11 @@ public class CategoryController {
     @PreAuthorize("hasAuthority('CAT_UDP')")
     public BaseResponse<Void> updateUser(@Valid @RequestBody UpdateCategoryRequest request) {
         Category category = categoryRepository.findById(request.getId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CATEGORY_NOT_FOUND_ERROR));
         // Update name
         if (!category.getName().equals(request.getName())) {
             if (categoryRepository.existsByName(request.getName())) {
-                throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
+                throw new BadRequestException(ErrorCode.CATEGORY_NAME_EXISTED_ERROR);
             }
         }
         // Update CATEGORY
@@ -97,10 +97,10 @@ public class CategoryController {
     @PreAuthorize("hasAuthority('CAT_DEL')")
     public BaseResponse<Void> delete(@PathVariable String id) {
         categoryRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CATEGORY_NOT_FOUND_ERROR));
 
         if (productRepository.existsByCategoryId(id)) {
-            throw new BadRequestException(ErrorCode.DELETE_RELATIONSHIP_ERROR);
+            throw new BadRequestException(ErrorCode.CATEGORY_CANT_DELETE_RELATIONSHIP_WITH_PRODUCT_ERROR);
         }
 
         // Delete CATEGORY

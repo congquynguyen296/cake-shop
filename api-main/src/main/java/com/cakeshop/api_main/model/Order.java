@@ -60,6 +60,9 @@ public class Order extends Abstract {
     @JoinColumn(name = "address_id")
     Address address;
 
+    @Column(name = "note", columnDefinition = "TEXT")
+    String note;
+
     public Order(Customer customer, Integer shippingFee) {
         this.customer = customer;
         this.shippingFee = shippingFee;
@@ -91,13 +94,12 @@ public class Order extends Abstract {
                 .map(entry -> {
                     Product product = entry.getProduct();
                     int quantity = entry.getQuantity();
-                    String note = entry.getNote();
                     if (!product.checkQuantity(quantity)) {
                         throw new BadRequestException(
                                 "Insufficient quantity for product: " + product.getId(),
-                                ErrorCode.INVALID_FORM_ERROR);
+                                ErrorCode.PRODUCT_QUANTITY_NOT_ENOUGH_ERROR);
                     }
-                    OrderItem orderItem = new OrderItem(product, quantity, note, this);
+                    OrderItem orderItem = new OrderItem(product, quantity, this);
                     orderItem.calculateTotalPrice();
                     product.setQuantity(product.getQuantity() - quantity);
                     return orderItem;
@@ -109,13 +111,13 @@ public class Order extends Abstract {
         LocalDateTime createdAtLocal = this.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         LocalDateTime now = LocalDateTime.now();
         if (Duration.between(createdAtLocal, now).toDays() > 3) {
-            throw new BadRequestException("Đơn hàng chỉ có thể hủy trong vòng 3 ngày", ErrorCode.INVALID_FORM_ERROR);
+            throw new BadRequestException(ErrorCode.ORDER_CANCEL_EXPIRED);
         }
 
         Integer status = currentStatus.getStatus();
         if (!Objects.equals(status, BaseConstant.ORDER_STATUS_PENDING) &&
                 !Objects.equals(status, BaseConstant.ORDER_STATUS_PROCESSING)) {
-            throw new BadRequestException("Chỉ có thể hủy đơn ở trạng thái Chờ xác nhận hoặc Đang xử lý", ErrorCode.INVALID_FORM_ERROR);
+            throw new BadRequestException(ErrorCode.ORDER_STATUS_INVALID_ERROR);
         }
 
         for (OrderItem item : this.getOrderItems()) {

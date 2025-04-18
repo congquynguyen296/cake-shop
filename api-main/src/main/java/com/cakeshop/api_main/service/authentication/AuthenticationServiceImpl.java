@@ -7,7 +7,9 @@ import com.cakeshop.api_main.dto.response.IntrospectResponse;
 import com.cakeshop.api_main.dto.response.LoginResponse;
 import com.cakeshop.api_main.dto.response.OutboundUserResponse;
 import com.cakeshop.api_main.exception.AppException;
+import com.cakeshop.api_main.exception.BadRequestException;
 import com.cakeshop.api_main.exception.ErrorCode;
+import com.cakeshop.api_main.exception.NotFoundException;
 import com.cakeshop.api_main.model.Account;
 import com.cakeshop.api_main.model.Customer;
 import com.cakeshop.api_main.model.Group;
@@ -131,7 +133,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         if (accountRepository.existsByEmail(request.getEmail()) ||
                 accountRepository.existsByUsername(request.getUsername())) {
             log.info("Email or Username existed");
-            throw new AppException(ErrorCode.RESOURCE_EXISTED);
+            throw new BadRequestException(ErrorCode.RESOURCE_EXISTED);
         }
 
         if (!Objects.equals(request.getPassword(), request.getConfirmPassword())) {
@@ -143,7 +145,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
             Account newAccount = Account.builder()
                     .username(request.getUsername())
                     .email(request.getEmail())
-                    .avatarPath("https://kenh14cdn.com/203336854389633024/2024/10/16/chuong-nhuoc-nam1-1729084853586986899768-1729096455287-17290964555741951663122.jpg")
+                    .avatarPath("https://res.cloudinary.com/dcxgx3ott/image/upload/v1744349601/Avatar_UTE_hddqyo.png")
                     .password(passwordEncoder.encode(request.getPassword()))
                     .isActive(false)
                     .build();
@@ -151,7 +153,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
             // Default group
             Group defaultGroup = groupRepository.findByKind(BaseConstant.GROUP_KIND_CUSTOMER);
             if (defaultGroup == null) {
-                throw new AppException(ErrorCode.RESOURCE_EXISTED);
+                throw new NotFoundException(ErrorCode.GROUP_NOT_FOUND_ERROR);
             }
             newAccount.setGroup(defaultGroup);
 
@@ -231,7 +233,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
             Account existedAccount = accountRepository.findByEmail(request.getEmail());
             if (existedAccount == null) {
                 log.info("Account not found");
-                throw new AppException(ErrorCode.RESOURCE_NOT_EXISTED);
+                throw new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR);
             }
             existedAccount.setIsActive(true);
 
@@ -261,7 +263,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         Account existedAccount = accountRepository.findByEmail(request.getEmail());
         if (existedAccount == null) {
             log.info("Account not found");
-            throw new AppException(ErrorCode.RESOURCE_NOT_EXISTED);
+            throw new NotFoundException(ErrorCode.CUSTOMER_NOT_FOUND_ERROR);
         }
 
         String message = "";
@@ -314,7 +316,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
                         .build();
                 Group defaultGroup = groupRepository.findByKind(BaseConstant.GROUP_KIND_CUSTOMER);
                 if (defaultGroup == null) {
-                    throw new AppException(ErrorCode.RESOURCE_EXISTED);
+                    throw new NotFoundException(ErrorCode.GROUP_NOT_FOUND_ERROR);
                 }
                 account.setGroup(defaultGroup);
                 accountRepository.save(account);
@@ -322,7 +324,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
             // Generate token
             String token = objectGenerationUtils.generateToken(account);
-            return LoginResponse.builder()
+                return LoginResponse.builder()
                     .token(token)
                     .build();
 

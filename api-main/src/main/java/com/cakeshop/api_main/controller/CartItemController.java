@@ -33,7 +33,7 @@ public class CartItemController {
             @Valid @RequestBody UpdateCartItemRequest request
     ) {
         CartItem cartItem = cartItemRepository.findById(request.getCartItemId())
-                .orElseThrow(() -> new NotFoundException("ITEM_NOT_FOUND_IN_CART", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CART_ITEM_NOT_FOUND_ERROR));
         if (request.getQuantity() == 0) {
             cartItemRepository.deleteById(request.getCartItemId());
         } else {
@@ -47,9 +47,9 @@ public class CartItemController {
     public BaseResponse<Void> delete(@PathVariable String id) {
         String username = SecurityUtil.getCurrentUsername();
         cartRepository.findByCustomerAccountUsername(username)
-                .orElseThrow(() -> new NotFoundException("CART_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.CART_NOT_FOUND_ERROR));
         cartItemRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("CART_ITEM_NOT_FOUND", ErrorCode.RESOURCE_NOT_EXISTED));
+                .orElseThrow(() -> new NotFoundException("CART_ITEM_NOT_FOUND", ErrorCode.CART_ITEM_NOT_FOUND_ERROR));
         cartItemRepository.deleteById(id);
         return BaseResponseUtils.success(null, "Deleted Cart Item");
     }

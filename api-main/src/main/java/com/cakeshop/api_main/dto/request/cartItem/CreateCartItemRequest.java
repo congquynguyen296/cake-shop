@@ -16,6 +16,10 @@ public class CreateCartItemRequest {
     @NotNull(message = "productId can not be null")
     String productId;
 
+    @Schema(description = "tagId", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "tagId can not be null")
+    String tagId;
+
     @Schema(description = "quantity", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "quantity can not be null")
     @Min(value = 1, message = "Quantity must be greater than 0")
