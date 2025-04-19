@@ -19,10 +19,6 @@ public class CartItem extends Abstract {
     @JoinColumn(name = "product_id")
     Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "tag_id")
-    Tag tag;
-
     @Column(name = "quantity")
     Integer quantity;
 

@@ -1,5 +1,6 @@
 package com.cakeshop.api_main.dto.response.order;
 
+import com.cakeshop.api_main.dto.response.address.AddressResponse;
 import com.cakeshop.api_main.dto.response.customer.CustomerResponse;
 import com.cakeshop.api_main.dto.response.orderItem.OrderItemResponse;
 import com.cakeshop.api_main.dto.response.orderStatus.OrderStatusResponse;
@@ -31,4 +32,6 @@ public class OrderResponse {
     OrderStatusResponse status;
     @Schema(description = "note")
     String note;
+    @Schema(description = "address")
+    AddressResponse address;
 }

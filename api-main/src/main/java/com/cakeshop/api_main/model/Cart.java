@@ -27,7 +27,7 @@ public class Cart extends Abstract {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     List<CartItem> cartItems = new ArrayList<>();
 
-    public void addItem(Product product, Tag tag, int quantity) {
+    public void addItem(Product product, int quantity) {
         Optional<CartItem> existingItem = cartItems.stream()
                 .filter(item -> item.getProduct().getId().equals(product.getId()))
                 .findFirst();
@@ -35,12 +35,7 @@ public class Cart extends Abstract {
             CartItem cartItem = existingItem.get();
             cartItem.setQuantity(cartItem.getQuantity() + quantity);
         } else {
-            CartItem newItem = CartItem.builder()
-                    .cart(this)
-                    .product(product)
-                    .tag(tag)
-                    .quantity(quantity)
-                    .build();
+            CartItem newItem = new CartItem(product, quantity, this);
             cartItems.add(newItem);
         }
     }

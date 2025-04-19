@@ -48,7 +48,6 @@ public class OrderController {
     ICustomerRepository customerRepository;
     IProductRepository productRepository;
     IOrderRepository orderRepository;
-    ITagRepository tagRepository;
 
     OrderMapper orderMapper;
     private final OrderStatusMapper orderStatusMapper;
@@ -111,22 +110,6 @@ public class OrderController {
             }
         }
 
-        List<String> tagIds = request.getOrderItems().stream()
-                .map(CreateOrderItemRequest::getTagId)
-                .collect(Collectors.toList());
-        List<Tag> tags = tagRepository.findAllById(tagIds);
-        if (tags.size() != tagIds.size()) {
-            List<String> foundIds = tags.stream()
-                    .map(Tag::getId)
-                    .toList();
-            List<String> missingIds = tagIds.stream()
-                    .filter(id -> !foundIds.contains(id))
-                    .toList();
-            if (!missingIds.isEmpty()) {
-                throw new NotFoundException("Tags not found: " + missingIds, ErrorCode.TAG_NOT_FOUND_ERROR);
-            }
-        }
-
         List<OrderItemDetails> orderItemDetailsList = new ArrayList<>();
         for (CreateOrderItemRequest item : request.getOrderItems()) {
             Product product = products.stream()
@@ -136,11 +119,7 @@ public class OrderController {
             if (product.getDiscount() != null && !product.getDiscount().isActive()) {
                 productRepository.updateDiscount(null);
             }
-            Tag tag = tags.stream()
-                    .filter(t -> t.getId().equals(item.getTagId()))
-                    .findFirst()
-                    .orElseThrow(() -> new NotFoundException(ErrorCode.TAG_NOT_FOUND_ERROR));
-            orderItemDetailsList.add(new OrderItemDetails(product, tag, item.getQuantity()));
+            orderItemDetailsList.add(new OrderItemDetails(product, item.getQuantity()));
         }
 
         Order order = new Order(customer, request.getShippingFee());

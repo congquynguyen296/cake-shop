@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Authentication" id="1745029284226-6">
+        <dropForeignKeyConstraint baseTableName="tbl_order_item" constraintName="FKam0oemtnd3l5wxmn8ts8slrhl"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1745029284226-7">
+        <dropForeignKeyConstraint baseTableName="tbl_cart_item" constraintName="FKbnsmmwp713u54ku7scc89egsu"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1745029284226-9">
+        <dropColumn columnName="tag_id" tableName="tbl_cart_item"/>
+    </changeSet>
+    <changeSet author="Authentication" id="1745029284226-10">
+        <dropColumn columnName="tag_id" tableName="tbl_order_item"/>
+    </changeSet>
+</databaseChangeLog>
