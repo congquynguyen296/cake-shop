@@ -38,7 +38,6 @@ public class CartController {
     ICustomerRepository customerRepository;
     ICartRepository cartRepository;
     IProductRepository productRepository;
-    ITagRepository tagRepository;
 
     CartMapper cartMapper;
 
@@ -78,9 +77,7 @@ public class CartController {
         if (!product.checkQuantity(request.getQuantity())) {
             throw new BadRequestException(ErrorCode.PRODUCT_QUANTITY_NOT_ENOUGH_ERROR);
         }
-        Tag tag = tagRepository.findById(request.getTagId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.TAG_NOT_FOUND_ERROR));
-        cart.addItem(product, tag, request.getQuantity());
+        cart.addItem(product, request.getQuantity());
         cartRepository.save(cart);
         return BaseResponseUtils.success(null, "Added item to cart successfully");
     }

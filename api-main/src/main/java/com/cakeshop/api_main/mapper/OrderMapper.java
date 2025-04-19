@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        uses = {CustomerMapper.class, OrderItemMapper.class, OrderStatusMapper.class})
+        uses = {CustomerMapper.class, OrderItemMapper.class, OrderStatusMapper.class, AddressMapper.class})
 public interface OrderMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "customer", target = "customer", qualifiedByName = "fromEntityToCustomerResponse")
@@ -19,6 +19,7 @@ public interface OrderMapper {
     @Mapping(source = "totalDiscount", target = "totalDiscount")
     @Mapping(source = "currentStatus", target = "status", qualifiedByName = "fromEntityToOrderStatusResponse")
     @Mapping(source = "note", target = "note")
+    @Mapping(source = "address", target = "address", qualifiedByName = "fromEntityToAddressResponse")
     @BeanMapping(ignoreByDefault = true)
     @Named("fromEntityToOrderResponse")
     OrderResponse fromEntityToOrderResponse(Order order);

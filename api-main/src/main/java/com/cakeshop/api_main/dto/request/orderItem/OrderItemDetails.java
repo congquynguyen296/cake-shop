@@ -14,6 +14,5 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderItemDetails {
     Product product;
-    Tag tag;
     int quantity;
 }

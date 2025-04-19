@@ -14,8 +14,6 @@ public class CartItemResponse {
     String id;
     @Schema(description = "product")
     ProductResponse product;
-    @Schema(description = "tag")
-    TagResponse tag;
     @Schema(description = "quantity")
     Integer quantity;
 }
