@@ -1,613 +1,727 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Cake Template">
-    <meta name="keywords" content="Cake, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cake | Template</title>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Mẫu Bánh Ngọt" />
+    <meta name="keywords" content="Bánh Ngọt, unica, sáng tạo, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bánh Ngọt | Mẫu</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/barfiller.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/flaticon.css" type="text/css" />
+    <link rel="stylesheet" href="css/barfiller.css" type="text/css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
 
     <style>
-        /* Cho phần preview */
-        .submit-review-section .card {
-            border: none;
-            border-radius: 8px;
-            background: #fff;
-            transition: all 0.3s ease;
-        }
+      /* Cho phần preview */
+      .submit-review-section .card {
+        border: none;
+        border-radius: 8px;
+        background: #fff;
+        transition: all 0.3s ease;
+      }
 
-        .submit-review-section .card:hover {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+      .submit-review-section .card:hover {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
 
-        .submit-review-section h5 {
-            color: #1a1a1a;
-            /* heading-color từ SCSS */
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+      .submit-review-section h5 {
+        color: #1a1a1a;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
 
-        .star-rating-input i {
-            transition: all 0.2s ease;
-        }
+      .star-rating-input i {
+        transition: all 0.2s ease;
+      }
 
-        .star-rating-input i:hover,
-        .star-rating-input i.active {
-            color: #f5c518 !important;
-            /* Màu vàng cho sao khi hover hoặc được chọn */
-            transform: scale(1.1);
-            /* Hiệu ứng phóng to nhẹ khi hover */
-        }
+      .star-rating-input i:hover,
+      .star-rating-input i.active {
+        color: #f5c518 !important;
+        transform: scale(1.1);
+      }
 
-        .submit-review-section .form-control {
-            border: 1px solid #e1e1e1;
-            border-radius: 6px;
-            font-size: 16px;
-            color: #444444;
-            transition: all 0.3s ease;
-        }
+      .submit-review-section .form-control {
+        border: 1px solid #e1e1e1;
+        border-radius: 6px;
+        font-size: 16px;
+        color: #444444;
+        transition: all 0.3s ease;
+      }
 
-        .submit-review-section .form-control:focus {
-            border-color: #f5a623;
-            /* primary-color từ template */
-            box-shadow: 0 0 5px rgba(245, 166, 35, 0.3);
-        }
+      .submit-review-section .form-control:focus {
+        border-color: #f5a623;
+        box-shadow: 0 0 5px rgba(245, 166, 35, 0.3);
+      }
 
-        .submit-review-section .primary-btn {
-            background: #f5a623;
-            /* primary-color */
-            border: none;
-            padding: 12px 0;
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            text-transform: uppercase;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
+      .submit-review-section .primary-btn {
+        background: #f5a623;
+        border: none;
+        padding: 12px 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        text-transform: uppercase;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
 
-        .submit-review-section .primary-btn:hover {
-            background: #e69500;
-            /* Màu tối hơn khi hover */
-            transform: translateY(-2px);
-            /* Hiệu ứng nâng nhẹ khi hover */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+      .submit-review-section .primary-btn:hover {
+        background: #e69500;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Page Preloder -->
     <div id="preloder">
-        <div class="loader"></div>
+      <div class="loader"></div>
     </div>
 
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__cart">
-            <div class="offcanvas__cart__links">
-                <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                <a href="#"><img src="img/icon/heart.png" alt=""></a>
-            </div>
-            <div class="offcanvas__cart__item">
-                <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                <div class="cart__price">Cart: <span>$0.00</span></div>
-            </div>
+      <div class="offcanvas__cart">
+        <div class="offcanvas__cart__links">
+          <a href="#" class="search-switch"
+            ><img src="img/icon/search.png" alt=""
+          /></a>
+          <a href="#"><img src="img/icon/heart.png" alt="" /></a>
         </div>
-        <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+        <div class="offcanvas__cart__item">
+          <a href="#"><img src="img/icon/cart.png" alt="" /> <span>0</span></a>
+          <div class="cart__price">Giỏ hàng: <span>0 VNĐ</span></div>
         </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__option">
+      </div>
+      <div class="offcanvas__logo">
+        <a href="./index.html"><img src="img/logo.png" alt="" /></a>
+      </div>
+      <div id="mobile-menu-wrap"></div>
+      <div class="offcanvas__option">
+        <ul>
+          <li>
+            VNĐ <span class="arrow_carrot-down"></span>
             <ul>
-                <li>USD <span class="arrow_carrot-down"></span>
-                    <ul>
-                        <li>EUR</li>
-                        <li>USD</li>
-                    </ul>
-                </li>
-                <li>ENG <span class="arrow_carrot-down"></span>
-                    <ul>
-                        <li>Spanish</li>
-                        <li>ENG</li>
-                    </ul>
-                </li>
-                <li><a href="#">Sign in</a> <span class="arrow_carrot-down"></span></li>
+              <li>USD</li>
+              <li>VNĐ</li>
             </ul>
-        </div>
+          </li>
+          <li>
+            Tiếng Việt <span class="arrow_carrot-down"></span>
+            <ul>
+              <li>Tiếng Anh</li>
+              <li>Tiếng Việt</li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Đăng nhập</a> <span class="arrow_carrot-down"></span>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
     <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="header__top__inner">
-                            <div class="header__top__left">
-                                <ul>
-                                    <li>USD <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li>EUR</li>
-                                            <li>USD</li>
-                                        </ul>
-                                    </li>
-                                    <li>ENG <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li>Spanish</li>
-                                            <li>ENG</li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Sign in</a> <span class="arrow_carrot-down"></span></li>
-                                </ul>
-                            </div>
-                            <div class="header__logo">
-                                <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                            </div>
-                            <div class="header__top__right">
-                                <div class="header__top__right__links">
-                                    <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                                    <a href="#"><img src="img/icon/heart.png" alt=""></a>
-                                </div>
-                                <div class="header__top__right__cart">
-                                    <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                                    <div class="cart__price">Cart: <span>$0.00</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="canvas__open"><i class="fa fa-bars"></i></div>
-            </div>
-        </div>
+      <div class="header__top">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="./about.html">About</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./wisslist.html">Wisslist</a></li>
-                                    <li><a href="./Class.html">Class</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="header__top__inner">
+                <div class="header__top__left">
+                  <ul>
+                    <li>
+                      VNĐ <span class="arrow_carrot-down"></span>
+                      <ul>
+                        <li>USD</li>
+                        <li>VNĐ</li>
+                      </ul>
+                    </li>
+                    <li>
+                      Tiếng Việt <span class="arrow_carrot-down"></span>
+                      <ul>
+                        <li>Tiếng Anh</li>
+                        <li>Tiếng Việt</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#">Đăng nhập</a>
+                      <span class="arrow_carrot-down"></span>
+                    </li>
+                  </ul>
                 </div>
+                <div class="header__logo">
+                  <a href="./index.html"><img src="img/logo.png" alt="" /></a>
+                </div>
+                <div class="header__top__right">
+                  <div class="header__top__right__links">
+                    <a href="#" class="search-switch"
+                      ><img src="img/icon/search.png" alt=""
+                    /></a>
+                    <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+                  </div>
+                  <div class="header__top__right__cart">
+                    <a href="#"
+                      ><img src="img/icon/cart.png" alt="" /> <span>0</span></a
+                    >
+                    <div class="cart__price">Giỏ hàng: <span>0 VNĐ</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <nav class="header__menu mobile-menu">
+              <ul>
+                <li><a href="./index.html">Trang chủ</a></li>
+                <li><a href="./about.html">Giới thiệu</a></li>
+                <li class="active"><a href="./shop.html">Cửa hàng</a></li>
+                <li>
+                  <a href="#">Trang</a>
+                  <ul class="dropdown">
+                    <li><a href="./shop-details.html">Chi tiết sản phẩm</a></li>
+                    <li><a href="./shoping-cart.html">Giỏ hàng</a></li>
+                    <li><a href="./checkout.html">Thanh toán</a></li>
+                    <li><a href="./wisslist.html">Danh sách yêu thích</a></li>
+                    <li><a href="./Class.html">Lớp học</a></li>
+                    <li><a href="./blog-details.html">Chi tiết bài viết</a></li>
+                  </ul>
+                </li>
+                <li><a href="./blog.html">Blog</a></li>
+                <li><a href="./contact.html">Liên hệ</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
     </header>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="breadcrumb__text">
-                        <h2>Product detail</h2>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="breadcrumb__links">
-                        <a href="./index.html">Home</a>
-                        <a href="./shop.html">Shop</a>
-                        <span>Sweet autumn leaves</span>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="breadcrumb__text">
+              <h2>Chi tiết sản phẩm</h2>
             </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="breadcrumb__links">
+              <a href="./index.html">Trang chủ</a>
+              <a href="./shop.html">Cửa hàng</a>
+              <span>Lá thu ngọt ngào</span>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <!-- Breadcrumb End -->
 
     <!-- Shop Details Section Begin -->
     <section class="product-details spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="product__details__img">
-                        <div class="product__details__big__img">
-                            <img class="big_img" src="img/shop/details/product-big-1.jpg" alt="">
-                        </div>
-                        <div class="product__details__thumb">
-                            <div class="pt__item active">
-                                <img data-imgbigurl="img/shop/details/product-big-2.jpg"
-                                    src="img/shop/details/product-big-2.jpg" alt="">
-                            </div>
-                            <div class="pt__item">
-                                <img data-imgbigurl="img/shop/details/product-big-1.jpg"
-                                    src="img/shop/details/product-big-1.jpg" alt="">
-                            </div>
-                            <div class="pt__item">
-                                <img data-imgbigurl="img/shop/details/product-big-4.jpg"
-                                    src="img/shop/details/product-big-4.jpg" alt="">
-                            </div>
-                            <div class="pt__item">
-                                <img data-imgbigurl="img/shop/details/product-big-3.jpg"
-                                    src="img/shop/details/product-big-3.jpg" alt="">
-                            </div>
-                            <div class="pt__item">
-                                <img data-imgbigurl="img/shop/details/product-big-5.jpg"
-                                    src="img/shop/details/product-big-5.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="product__details__img">
+              <div class="product__details__big__img">
+                <img
+                  class="big_img"
+                  src="img/shop/details/product-big-1.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="product__details__thumb">
+                <div class="pt__item active">
+                  <img
+                    data-imgbigurl="img/shop/details/product-big-2.jpg"
+                    src="img/shop/details/product-big-2.jpg"
+                    alt=""
+                  />
                 </div>
-                <div class="col-lg-6">
-                    <div class="product__details__text">
-                        <div class="product__label">Cupcake</div>
-                        <h4>SWEET AUTUMN LEAVES</h4>
-                        <h5>$26.41</h5>
-                        <p>Here is desciption about this cake. Excepturi aliquam eaque quisquam. Iste, eligendi
-                            adipisci! Explicabo a illo adipisci minima, quaerat dicta autem voluptatibus aperiam fugit.
-                        </p>
-                        <ul>
-                            <li>SKU: <span>17</span></li>
-                            <li>Category: <span>Biscuit cake</span></li>
-                            <li>Tags: <span>Gadgets, minimalisstic</span></li>
-                        </ul>
-                        <div class="product__details__option">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="2">
-                                </div>
-                            </div>
-                            <a href="#" class="primary-btn">Add to cart</a>
-                            <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
-                        </div>
-                    </div>
+                <div class="pt__item">
+                  <img
+                    data-imgbigurl="img/shop/details/product-big-1.jpg"
+                    src="img/shop/details/product-big-1.jpg"
+                    alt=""
+                  />
                 </div>
+                <div class="pt__item">
+                  <img
+                    data-imgbigurl="img/shop/details/product-big-4.jpg"
+                    src="img/shop/details/product-big-4.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="pt__item">
+                  <img
+                    data-imgbigurl="img/shop/details/product-big-3.jpg"
+                    src="img/shop/details/product-big-3.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="pt__item">
+                  <img
+                    data-imgbigurl="img/shop/details/product-big-5.jpg"
+                    src="img/shop/details/product-big-5.jpg"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
-            <div class="product__details__tab">
-                <div class="col-lg-12">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Additional information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Đánh giá</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-8">
-                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and
-                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one
-                                        bite will send you to summertime. Each gift arrives in an elegant gift box and
-                                        arrives with a greeting card of your choice that you can personalize online!</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-8">
-                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and
-                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one
-                                        bite will send you to summertime. Each gift arrives in an elegant gift box and
-                                        arrives with a greeting card of your choice that you can personalize online!2
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Phần Đánh giá -->
-                                    <div class="reviews-section">
-                                        <h5 class="mb-4" style="font-weight: bold; margin-top: 30px;">Đánh giá của khách
-                                            hàng</h5>
-                                        <!-- Đánh giá mẫu 1 -->
-                                        <div class="review-item mb-4 p-3 border rounded">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h6 class="mb-1">Nguyễn Văn A</h6>
-                                                    <div class="star-rating">
-                                                        <i class="fa fa-star text-warning"></i>
-                                                        <i class="fa fa-star text-warning"></i>
-                                                        <i class="fa fa-star text-warning"></i>
-                                                        <i class="fa fa-star text-warning"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                    </div>
-                                                </div>
-                                                <small class="text-muted">20/03/2025</small>
-                                            </div>
-                                            <p class="mt-2">Bánh rất ngon, vị dâu tươi mát và không quá ngọt. Giao hàng
-                                                nhanh, đóng gói cẩn thận. Sẽ mua lại!</p>
-                                        </div>
-                                        <!-- Đánh giá mẫu 2 -->
-                                        <div class="review-item mb-4 p-3 border rounded">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h6 class="mb-1">Trần Thị B</h6>
-                                                    <div class="star-rating">
-                                                        <i class="fa fa-star text-warning"></i>
-                                                        <i class="fa fa-star text-warning"></i>
-                                                        <i class="fa fa-star text-warning"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                    </div>
-                                                </div>
-                                                <small class="text-muted">18/03/2025</small>
-                                            </div>
-                                            <p class="mt-2">Bánh khá ổn, nhưng tôi mong có thêm nhiều dâu hơn. Dịch vụ
-                                                khách hàng tốt, hỗ trợ nhiệt tình.</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Phần Gửi Đánh giá -->
-                                    <div class="submit-review-section mt-5">
-                                        <h5 class="mb-4">Gửi đánh giá của bạn</h5>
-                                        <div class="card shadow-sm p-4">
-                                            <form id="review-form">
-                                                <!-- Đánh giá sao -->
-                                                <div class="form-group mb-4">
-                                                    <label for="rating" class="form-label fw-bold mb-2">Đánh giá
-                                                        sao:</label>
-                                                    <div class="star-rating-input d-flex align-items-center mb-2">
-                                                        <i class="fa fa-star fa-2x me-1 text-secondary"
-                                                            data-value="1"></i>
-                                                        <i class="fa fa-star fa-2x me-1 text-secondary"
-                                                            data-value="2"></i>
-                                                        <i class="fa fa-star fa-2x me-1 text-secondary"
-                                                            data-value="3"></i>
-                                                        <i class="fa fa-star fa-2x me-1 text-secondary"
-                                                            data-value="4"></i>
-                                                        <i class="fa fa-star fa-2x me-1 text-secondary"
-                                                            data-value="5"></i>
-                                                        <input type="hidden" name="rating" id="rating" value="0"
-                                                            required>
-                                                    </div>
-                                                    <small class="text-muted">Chọn số sao từ 1 đến 5</small>
-                                                </div>
-                                                <!-- Nhận xét -->
-                                                <div class="form-group mb-4">
-                                                    <label for="comment" class="form-label fw-bold mb-2">Nhận
-                                                        xét:</label>
-                                                    <textarea class="form-control shadow-sm" id="comment" name="comment"
-                                                        rows="5" placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..."
-                                                        required></textarea>
-                                                </div>
-                                                <!-- Nút gửi -->
-                                                <button type="submit" class="primary-btn w-100">Gửi đánh giá</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="product__details__text">
+              <div class="product__label">Bánh ngọt</div>
+              <h4>LÁ THU NGỌT NGÀO</h4>
+              <h5>600.000 VNĐ</h5>
+              <p>
+                Đây là mô tả về chiếc bánh này. Vị ngọt nhẹ nhàng, thơm ngon với
+                nguyên liệu tươi mới. Thích hợp cho các dịp đặc biệt.
+              </p>
+              <ul>
+                <li>Mã sản phẩm: <span>17</span></li>
+                <li>Danh mục: <span>Bánh quy</span></li>
+                <li>Thẻ: <span>Nguyên liệu tươi, ngọt nhẹ</span></li>
+              </ul>
+              <div class="product__details__option">
+                <div class="quantity">
+                  <div class="pro-qty">
+                    <input type="text" value="2" />
+                  </div>
                 </div>
+                <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
+                <a href="#" class="heart__btn"
+                  ><span class="icon_heart_alt"></span
+                ></a>
+              </div>
             </div>
+          </div>
         </div>
+        <div class="product__details__tab">
+          <div class="col-lg-12">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  data-toggle="tab"
+                  href="#tabs-1"
+                  role="tab"
+                  >Mô tả</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                  >Thông tin bổ sung</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                  >Đánh giá</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-lg-8">
+                    <p>
+                      Chiếc bánh dâu tây tuyệt hảo này là một món quà đặc biệt
+                      với những miếng dâu tây ngọt ngào và thơm ngon. Được làm
+                      từ nguyên liệu tươi nhất, chỉ một miếng là bạn sẽ cảm nhận
+                      được mùa hè rực rỡ. Mỗi món quà được gói trong hộp quà
+                      sang trọng và đi kèm thiệp chúc mừng mà bạn có thể tùy
+                      chỉnh trực tuyến!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tabs-2" role="tabpanel">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-lg-8">
+                    <p>
+                      Chiếc bánh dâu tây này là một món quà đặc biệt với những
+                      miếng dâu tây ngọt ngào và thơm ngon. Được làm từ nguyên
+                      liệu tươi nhất, chỉ một miếng là bạn sẽ cảm nhận được mùa
+                      hè rực rỡ. Mỗi món quà được gói trong hộp quà sang trọng
+                      và đi kèm thiệp chúc mừng mà bạn có thể tùy chỉnh trực
+                      tuyến!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tabs-3" role="tabpanel">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-lg-8">
+                    <!-- Phần Đánh giá -->
+                    <div class="reviews-section">
+                      <h5
+                        class="mb-4"
+                        style="font-weight: bold; margin-top: 30px"
+                      >
+                        Đánh giá của khách hàng
+                      </h5>
+                      <!-- Đánh giá mẫu 1 -->
+                      <div class="review-item mb-4 p-3 border rounded">
+                        <div class="d-flex justify-content-between">
+                          <div>
+                            <h6 class="mb-1">Nguyễn Văn A</h6>
+                            <div class="star-rating">
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-secondary"></i>
+                            </div>
+                          </div>
+                          <small class="text-muted">20/03/2025</small>
+                        </div>
+                        <p class="mt-2">
+                          Bánh rất ngon, vị dâu tươi mát và không quá ngọt. Giao
+                          hàng nhanh, đóng gói cẩn thận. Sẽ mua lại!
+                        </p>
+                      </div>
+                      <!-- Đánh giá mẫu 2 -->
+                      <div class="review-item mb-4 p-3 border rounded">
+                        <div class="d-flex justify-content-between">
+                          <div>
+                            <h6 class="mb-1">Trần Thị B</h6>
+                            <div class="star-rating">
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-secondary"></i>
+                              <i class="fa fa-star text-secondary"></i>
+                            </div>
+                          </div>
+                          <small class="text-muted">18/03/2025</small>
+                        </div>
+                        <p class="mt-2">
+                          Bánh khá ổn, nhưng tôi mong có thêm nhiều dâu hơn.
+                          Dịch vụ khách hàng tốt, hỗ trợ nhiệt tình.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Phần Gửi Đánh giá -->
+                    <div class="submit-review-section mt-5">
+                      <h5 class="mb-4">Gửi đánh giá của bạn</h5>
+                      <div class="card shadow-sm p-4">
+                        <form id="review-form">
+                          <!-- Đánh giá sao -->
+                          <div class="form-group mb-4">
+                            <label for="rating" class="form-label fw-bold mb-2"
+                              >Đánh giá sao:</label
+                            >
+                            <div
+                              class="star-rating-input d-flex align-items-center mb-2"
+                            >
+                              <i
+                                class="fa fa-star fa-2x me-1 text-secondary"
+                                data-value="1"
+                              ></i>
+                              <i
+                                class="fa fa-star fa-2x me-1 text-secondary"
+                                data-value="2"
+                              ></i>
+                              <i
+                                class="fa fa-star fa-2x me-1 text-secondary"
+                                data-value="3"
+                              ></i>
+                              <i
+                                class="fa fa-star fa-2x me-1 text-secondary"
+                                data-value="4"
+                              ></i>
+                              <i
+                                class="fa fa-star fa-2x me-1 text-secondary"
+                                data-value="5"
+                              ></i>
+                              <input
+                                type="hidden"
+                                name="rating"
+                                id="rating"
+                                value="0"
+                                required
+                              />
+                            </div>
+                            <small class="text-muted"
+                              >Chọn số sao từ 1 đến 5</small
+                            >
+                          </div>
+                          <!-- Nhận xét -->
+                          <div class="form-group mb-4">
+                            <label for="comment" class="form-label fw-bold mb-2"
+                              >Nhận xét:</label
+                            >
+                            <textarea
+                              class="form-control shadow-sm"
+                              id="comment"
+                              name="comment"
+                              rows="5"
+                              placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..."
+                              required
+                            ></textarea>
+                          </div>
+                          <!-- Nút gửi -->
+                          <button type="submit" class="primary-btn w-100">
+                            Gửi đánh giá
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- Shop Details Section End -->
 
     <!-- Related Products Section Begin -->
     <section class="related-products spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-title">
-                        <h2>Related Products</h2>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="section-title">
+              <h2>Sản phẩm liên quan</h2>
             </div>
-            <div class="row">
-                <div class="related__products__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-1.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Dozen Cupcakes</a></h6>
-                                <div class="product__item__price">$32.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-2.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Cookies and Cream</a></h6>
-                                <div class="product__item__price">$30.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-3.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Gluten Free Mini Dozen</a></h6>
-                                <div class="product__item__price">$31.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-4.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Cookie Dough</a></h6>
-                                <div class="product__item__price">$25.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-5.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Vanilla Salted Caramel</a></h6>
-                                <div class="product__item__price">$05.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-6.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">German Chocolate</a></h6>
-                                <div class="product__item__price">$14.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="related__products__slider owl-carousel">
+            <div class="col-lg-3">
+              <div class="product__item">
+                <div
+                  class="product__item__pic set-bg"
+                  data-setbg="img/shop/product-1.jpg"
+                >
+                  <div class="product__label">
+                    <span>Bánh ngọt</span>
+                  </div>
+                </div>
+                <div class="product__item__text">
+                  <h6><a href="#">12 Bánh Cupcake</a></h6>
+                  <div class="product__item__price">750.000 VNĐ</div>
+                  <div class="cart_add">
+                    <a href="#">Thêm vào giỏ hàng</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="product__item">
+                <div
+                  class="product__item__pic set-bg"
+                  data-setbg="img/shop/product-2.jpg"
+                >
+                  <div class="product__label">
+                    <span>Bánh ngọt</span>
+                  </div>
+                </div>
+                <div class="product__item__text">
+                  <h6><a href="#">Bánh Kem và Bánh Quy</a></h6>
+                  <div class="product__item__price">700.000 VNĐ</div>
+                  <div class="cart_add">
+                    <a href="#">Thêm vào giỏ hàng</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="product__item">
+                <div
+                  class="product__item__pic set-bg"
+                  data-setbg="img/shop/product-3.jpg"
+                >
+                  <div class="product__label">
+                    <span>Bánh ngọt</span>
+                  </div>
+                </div>
+                <div class="product__item__text">
+                  <h6><a href="#">12 Bánh Cupcake Không Gluten</a></h6>
+                  <div class="product__item__price">720.000 VNĐ</div>
+                  <div class="cart_add">
+                    <a href="#">Thêm vào giỏ hàng</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="product__item">
+                <div
+                  class="product__item__pic set-bg"
+                  data-setbg="img/shop/product-4.jpg"
+                >
+                  <div class="product__label">
+                    <span>Bánh ngọt</span>
+                  </div>
+                </div>
+                <div class="product__item__text">
+                  <h6><a href="#">Bánh Quy Nhân</a></h6>
+                  <div class="product__item__price">580.000 VNĐ</div>
+                  <div class="cart_add">
+                    <a href="#">Thêm vào giỏ hàng</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="product__item">
+                <div
+                  class="product__item__pic set-bg"
+                  data-setbg="img/shop/product-5.jpg"
+                >
+                  <div class="product__label">
+                    <span>Bánh ngọt</span>
+                  </div>
+                </div>
+                <div class="product__item__text">
+                  <h6><a href="#">Caramel Vani Muối</a></h6>
+                  <div class="product__item__price">120.000 VNĐ</div>
+                  <div class="cart_add">
+                    <a href="#">Thêm vào giỏ hàng</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="product__item">
+                <div
+                  class="product__item__pic set-bg"
+                  data-setbg="img/shop/product-6.jpg"
+                >
+                  <div class="product__label">
+                    <span>Bánh ngọt</span>
+                  </div>
+                </div>
+                <div class="product__item__text">
+                  <h6><a href="#">Sô-cô-la Đức</a></h6>
+                  <div class="product__item__price">320.000 VNĐ</div>
+                  <div class="cart_add">
+                    <a href="#">Thêm vào giỏ hàng</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- Related Products Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer set-bg" data-setbg="img/footer-bg.jpg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="footer__widget">
+              <h6>GIỜ LÀM VIỆC</h6>
+              <ul>
+                <li>Thứ Hai - Thứ Sáu: 08:00 – 20:30</li>
+                <li>Thứ Bảy: 10:00 – 16:30</li>
+                <li>Chủ Nhật: 10:00 – 16:30</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="footer__about">
+              <div class="footer__logo">
+                <a href="#"><img src="img/footer-logo.png" alt="" /></a>
+              </div>
+              <p>
+                Lorem ipsum dolor amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore dolore magna aliqua.
+              </p>
+              <div class="footer__social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="footer__newslatter">
+              <h6>Đăng ký</h6>
+              <p>Nhận thông tin cập nhật và ưu đãi mới nhất.</p>
+              <form action="#">
+                <input type="text" placeholder="Email" />
+                <button type="submit"><i class="fa fa-send-o"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>WORKING HOURS</h6>
-                        <ul>
-                            <li>Monday - Friday: 08:00 am – 08:30 pm</li>
-                            <li>Saturday: 10:00 am – 16:30 pm</li>
-                            <li>Sunday: 10:00 am – 16:30 pm</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="#"><img src="img/footer-logo.png" alt=""></a>
-                        </div>
-                        <p>Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore dolore magna aliqua.</p>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="footer__newslatter">
-                        <h6>Subscribe</h6>
-                        <p>Get latest updates and offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit"><i class="fa fa-send-o"></i></button>
-                        </form>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-lg-7">
+              <p class="copyright__text text-white">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Bản quyền ©
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                Mọi quyền được bảo lưu | Mẫu này được tạo với
+                <i class="fa fa-heart" aria-hidden="true"></i> bởi
+                <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </p>
             </div>
-        </div>
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <p class="copyright__text text-white">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>
-                                document.write(new Date().getFullYear());
-                            </script> All rights reserved | This template is made with <i class="fa fa-heart"
-                                aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="copyright__widget">
-                            <ul>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Site Map</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-5">
+              <div class="copyright__widget">
+                <ul>
+                  <li><a href="#">Chính sách bảo mật</a></li>
+                  <li><a href="#">Điều khoản & Điều kiện</a></li>
+                  <li><a href="#">Sơ đồ trang web</a></li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </footer>
     <!-- Footer Section End -->
 
     <!-- Search Begin -->
     <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
+      <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Tìm kiếm tại đây..."
+          />
+        </form>
+      </div>
     </div>
     <!-- Search End -->
 
@@ -624,61 +738,65 @@
 
     <!-- Xử lý gửi đánh giá -->
     <script>
-        $(document).ready(function () {
-            // Xử lý chọn số sao
-            $('.star-rating-input i').on('click', function () {
-                const ratingValue = $(this).data('value');
-                $('#rating').val(ratingValue);
+      $(document).ready(function () {
+        // Xử lý chọn số sao
+        $(".star-rating-input i").on("click", function () {
+          const ratingValue = $(this).data("value");
+          $("#rating").val(ratingValue);
 
-                // Cập nhật giao diện sao
-                $('.star-rating-input i').removeClass('text-warning active').addClass('text-secondary');
-                $(this).prevAll('i').addBack().removeClass('text-secondary').addClass(
-                    'text-warning active');
-            });
-
-            // Hiệu ứng hover cho sao
-            $('.star-rating-input i').hover(
-                function () {
-                    $(this).prevAll('i').addBack().addClass('text-warning');
-                },
-                function () {
-                    $('.star-rating-input i').each(function () {
-                        if (!$(this).hasClass('active')) {
-                            $(this).removeClass('text-warning').addClass('text-secondary');
-                        }
-                    });
-                }
-            );
-
-            // Xử lý gửi biểu mẫu
-            $('#review-form').on('submit', function (e) {
-                e.preventDefault();
-
-                const rating = $('#rating').val();
-                const comment = $('#comment').val().trim();
-
-                // Kiểm tra tính hợp lệ
-                if (rating == 0) {
-                    alert('Vui lòng chọn số sao!');
-                    return;
-                }
-                if (!comment) {
-                    alert('Vui lòng nhập nhận xét!');
-                    return;
-                }
-
-                // Mô phỏng gửi đánh giá thành công
-                alert('Đánh giá của bạn đã được gửi thành công!');
-
-                // Reset biểu mẫu
-                $('#rating').val(0);
-                $('#comment').val('');
-                $('.star-rating-input i').removeClass('text-warning active').addClass('text-secondary');
-
-                // (Trong thực tế, bạn sẽ gửi dữ liệu đến server qua AJAX và cập nhật danh sách đánh giá)
-            });
+          // Cập nhật giao diện sao
+          $(".star-rating-input i")
+            .removeClass("text-warning active")
+            .addClass("text-secondary");
+          $(this)
+            .prevAll("i")
+            .addBack()
+            .removeClass("text-secondary")
+            .addClass("text-warning active");
         });
-    </script>
-</body>
 
+        // Hiệu ứng hover cho sao
+        $(".star-rating-input i").hover(
+          function () {
+            $(this).prevAll("i").addBack().addClass("text-warning");
+          },
+          function () {
+            $(".star-rating-input i").each(function () {
+              if (!$(this).hasClass("active")) {
+                $(this).removeClass("text-warning").addClass("text-secondary");
+              }
+            });
+          }
+        );
+
+        // Xử lý gửi biểu mẫu
+        $("#review-form").on("submit", function (e) {
+          e.preventDefault();
+
+          const rating = $("#rating").val();
+          const comment = $("#comment").val().trim();
+
+          // Kiểm tra tính hợp lệ
+          if (rating == 0) {
+            alert("Vui lòng chọn số sao!");
+            return;
+          }
+          if (!comment) {
+            alert("Vui lòng nhập nhận xét!");
+            return;
+          }
+
+          // Mô phỏng gửi đánh giá thành công
+          alert("Đánh giá của bạn đã được gửi thành công!");
+
+          // Reset biểu mẫu
+          $("#rating").val(0);
+          $("#comment").val("");
+          $(".star-rating-input i")
+            .removeClass("text-warning active")
+            .addClass("text-secondary");
+        });
+      });
+    </script>
+  </body>
 </html>
