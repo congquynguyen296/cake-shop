@@ -108,15 +108,12 @@ public class Order extends Abstract {
     }
 
     public void cancel() {
-        LocalDateTime createdAtLocal = this.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        LocalDateTime now = LocalDateTime.now();
-        if (Duration.between(createdAtLocal, now).toDays() > 3) {
+        if (!checkDate()) {
             throw new BadRequestException(ErrorCode.ORDER_CANCEL_EXPIRED);
         }
 
         Integer status = currentStatus.getStatus();
-        if (!Objects.equals(status, BaseConstant.ORDER_STATUS_PENDING) &&
-                !Objects.equals(status, BaseConstant.ORDER_STATUS_PROCESSING)) {
+        if (!checkStatus(status)) {
             throw new BadRequestException(ErrorCode.ORDER_STATUS_INVALID_ERROR);
         }
 
@@ -131,6 +128,16 @@ public class Order extends Abstract {
         OrderStatus cancelStatus = new OrderStatus(BaseConstant.ORDER_STATUS_CANCELED, new Date(), this);
         this.setCurrentStatus(cancelStatus);
         this.getOrderStatuses().add(cancelStatus);
+    }
+
+    private boolean checkDate() {
+        LocalDateTime createdAtLocal = this.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime now = LocalDateTime.now();
+        return Duration.between(createdAtLocal, now).toDays() <= 3;
+    }
+
+    private boolean checkStatus(int status) {
+        return status == BaseConstant.ORDER_STATUS_PENDING || status == BaseConstant.ORDER_STATUS_PROCESSING;
     }
 
 }
